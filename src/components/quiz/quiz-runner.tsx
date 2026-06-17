@@ -15,6 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+import { persistQuizScore } from "@/lib/progress-storage";
 import type { QuizQuestion } from "@/lib/types";
 
 function shuffle<T>(arr: T[]): T[] {
@@ -100,19 +101,11 @@ export function QuizRunner({
   }
 
   function persistScore() {
-    if (typeof window === "undefined") return;
-    try {
-      const raw = window.localStorage.getItem("claude-expert-quiz-progress");
-      const data = raw ? JSON.parse(raw) : {};
-      data[categorySlug] = {
-        score,
-        total: order.length,
-        date: new Date().toISOString(),
-      };
-      window.localStorage.setItem("claude-expert-quiz-progress", JSON.stringify(data));
-    } catch {
-      // localStorage indisponible — pas bloquant
-    }
+    persistQuizScore(categorySlug, {
+      score,
+      total: order.length,
+      date: new Date().toISOString(),
+    });
   }
 
   function handleRestart() {

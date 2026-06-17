@@ -18,6 +18,7 @@ const NAV_LINKS = [
   { href: "/", label: "Accueil" },
   { href: "/apprendre", label: "Apprendre" },
   { href: "/quiz", label: "Quiz" },
+  { href: "/progression", label: "Progression" },
 ];
 
 function NavLink({

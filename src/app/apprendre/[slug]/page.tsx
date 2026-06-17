@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { DynamicIcon } from "@/components/dynamic-icon";
 import { LevelBadge } from "@/components/level-badge";
 import { MarkdownContent } from "@/components/markdown-content";
+import { MarkModuleRead } from "@/components/mark-module-read";
 import { getAdjacentModules, getModuleBySlug, modules } from "@/lib/modules";
 import { getQuestionCountByCategory } from "@/lib/quiz-data";
 
@@ -42,6 +43,7 @@ export default async function ModulePage({
 
   return (
     <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_260px]">
+      <MarkModuleRead slug={mod.slug} />
       <article>
         <Link
           href="/apprendre"

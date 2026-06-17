@@ -2,28 +2,12 @@
 
 import { useSyncExternalStore } from "react";
 import { Badge } from "@/components/ui/badge";
-
-interface ProgressEntry {
-  score: number;
-  total: number;
-  date: string;
-}
-
-function readEntry(categorySlug: string): ProgressEntry | null {
-  try {
-    const raw = window.localStorage.getItem("claude-expert-quiz-progress");
-    if (!raw) return null;
-    const data = JSON.parse(raw);
-    return data[categorySlug] ?? null;
-  } catch {
-    return null;
-  }
-}
+import { readQuizEntry } from "@/lib/progress-storage";
 
 function useProgressEntry(categorySlug: string) {
   return useSyncExternalStore(
     () => () => {},
-    () => readEntry(categorySlug),
+    () => readQuizEntry(categorySlug),
     () => null
   );
 }
