@@ -20,7 +20,7 @@ export default function Home() {
         <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-20 text-center sm:px-6 sm:py-28">
           <Badge variant="outline" className="gap-2 border-primary/30 bg-primary/5 px-3 py-1 text-primary">
             <Sparkles className="size-3.5" />
-            Une formation WeHighTech — complète, non officielle, à Claude Code
+            Une formation indépendante de WeHighTech sur Claude Code
           </Badge>
 
           <h1 className="max-w-3xl text-4xl font-bold tracking-tight sm:text-6xl">

@@ -9,9 +9,9 @@ export function SiteFooter() {
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Sparkles className="size-4" />
           <span>
-            Claude Expert — Une formation proposée par{" "}
-            <span className="font-medium text-foreground">WeHighTech</span>, non officielle à
-            Claude Code.
+            Claude Expert — Une formation indépendante proposée par{" "}
+            <span className="font-medium text-foreground">WeHighTech</span>, non affiliée à
+            Anthropic.
           </span>
         </div>
         <nav className="flex gap-6 text-sm text-muted-foreground">

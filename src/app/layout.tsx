@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Claude Expert — Devenez expert de Claude Code | Une formation WeHighTech",
   description:
-    "Une formation WeHighTech, non officielle, pour devenir expert de Claude Code : bases, CLAUDE.md, Skills, MCP, Agents, Hooks, Plan Mode, bonnes pratiques. Avec quiz corrigés pour valider vos acquis.",
+    "Une formation indépendante de WeHighTech pour devenir expert de Claude Code : bases, CLAUDE.md, Skills, MCP, Agents, Hooks, Plan Mode, bonnes pratiques. Avec quiz corrigés pour valider vos acquis.",
 };
 
 export default function RootLayout({

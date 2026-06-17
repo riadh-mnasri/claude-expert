@@ -2,7 +2,7 @@
 
 A polished, content-rich learning platform to go from zero to expert on **Claude Code** — Anthropic's agentic coding CLI. Built with Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui.
 
-A training published by **WeHighTech**. This is an independent, unofficial educational resource — it is not affiliated with or endorsed by Anthropic.
+An independent training published by **WeHighTech** — not affiliated with, sponsored by, or endorsed by Anthropic. "Claude" and "Claude Code" are trademarks of Anthropic, PBC.
 
 The site has two main sections:
 
