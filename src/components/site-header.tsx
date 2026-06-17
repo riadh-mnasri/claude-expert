@@ -53,7 +53,12 @@ export function SiteHeader() {
           <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
             <Sparkles className="size-4" />
           </span>
-          <span className="hidden sm:inline">Claude Expert</span>
+          <span className="flex flex-col leading-tight">
+            <span className="hidden sm:inline">Claude Expert</span>
+            <span className="hidden text-[0.65rem] font-normal text-muted-foreground sm:inline">
+              Une formation WeHighTech
+            </span>
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">

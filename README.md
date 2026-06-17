@@ -2,6 +2,8 @@
 
 A polished, content-rich learning platform to go from zero to expert on **Claude Code** — Anthropic's agentic coding CLI. Built with Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui.
 
+A training published by **WeHighTech**. This is an independent, unofficial educational resource — it is not affiliated with or endorsed by Anthropic.
+
 The site has two main sections:
 
 - **Learn** (`/apprendre`) — 12 ordered modules covering everything from first launch to advanced mechanics: CLI & REPL, `CLAUDE.md` & memory, built-in tools, permissions & security, Skills, MCP (Model Context Protocol), Agents & sub-agents, Hooks, Plan Mode, and advanced best practices.
@@ -81,4 +83,4 @@ It can also be self-hosted with `npm run build && npm run start` on any Node.js 
 
 This project is provided for personal learning purposes.
 
-© 2026 Riadh MNASRI. All rights reserved.
+© 2026 WeHighTech — Riadh MNASRI. All rights reserved.
