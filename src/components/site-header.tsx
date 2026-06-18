@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { GraduationCap, Menu, Sparkles } from "lucide-react";
@@ -37,21 +38,44 @@ function NavLink({
       href={href}
       onClick={onClick}
       className={cn(
-        "text-sm font-medium transition-colors hover:text-foreground",
-        isActive ? "text-foreground" : "text-muted-foreground"
+        "relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+        isActive
+          ? "text-primary"
+          : "text-muted-foreground hover:text-foreground"
       )}
     >
+      {isActive && (
+        <span className="absolute inset-0 -z-10 rounded-full bg-primary/10" />
+      )}
       {label}
     </Link>
   );
 }
 
+function useScrolled() {
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+  return scrolled;
+}
+
 export function SiteHeader() {
+  const scrolled = useScrolled();
+
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md">
+    <header
+      className={cn(
+        "sticky top-0 z-50 w-full border-b bg-background/80 backdrop-blur-md transition-shadow",
+        scrolled ? "border-border/60 shadow-sm" : "border-transparent"
+      )}
+    >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
         <Link href="/" className="flex items-center gap-2 font-semibold tracking-tight">
-          <span className="flex size-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+          <span className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-chart-5 text-primary-foreground shadow-sm">
             <Sparkles className="size-4" />
           </span>
           <span className="flex flex-col leading-tight">
@@ -62,7 +86,7 @@ export function SiteHeader() {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-1 md:flex">
           {NAV_LINKS.map((link) => (
             <NavLink key={link.href} {...link} />
           ))}

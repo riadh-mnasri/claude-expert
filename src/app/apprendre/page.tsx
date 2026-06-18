@@ -1,9 +1,5 @@
-import Link from "next/link";
 import type { Metadata } from "next";
-import { ArrowRight, Clock } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { DynamicIcon } from "@/components/dynamic-icon";
-import { LevelBadge } from "@/components/level-badge";
+import { ModuleCard } from "@/components/module-card";
 import { modules } from "@/lib/modules";
 
 export const metadata: Metadata = {
@@ -28,34 +24,7 @@ export default function ApprendrePage() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {sorted.map((m) => (
-          <Link key={m.slug} href={`/apprendre/${m.slug}`} className="group">
-            <Card className="h-full transition-all hover:border-primary/40 hover:shadow-md">
-              <CardHeader>
-                <div className="flex items-start justify-between">
-                  <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <DynamicIcon name={m.icon} className="size-5" />
-                  </span>
-                  <LevelBadge level={m.level} />
-                </div>
-                <CardTitle className="pt-2 text-base leading-snug">
-                  {m.order}. {m.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-sm text-muted-foreground">{m.summary}</p>
-                <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
-                  <span className="flex items-center gap-1">
-                    <Clock className="size-3.5" />
-                    {m.duration}
-                  </span>
-                  <span className="flex items-center gap-1 font-medium text-primary opacity-0 transition-opacity group-hover:opacity-100">
-                    Lire
-                    <ArrowRight className="size-3.5" />
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
+          <ModuleCard key={m.slug} module={m} showMeta />
         ))}
       </div>
     </div>

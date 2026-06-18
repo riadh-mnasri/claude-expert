@@ -13,8 +13,9 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+import { RadialProgress } from "@/components/radial-progress";
 import { DynamicIcon } from "@/components/dynamic-icon";
+import { cn } from "@/lib/utils";
 import { modules } from "@/lib/modules";
 import { quizCategories } from "@/lib/quiz-categories";
 import {
@@ -94,6 +95,33 @@ export function ProgressDashboard() {
         </Button>
       </div>
 
+      <div className="mb-10 grid gap-6 overflow-hidden rounded-xl border border-border bg-card p-6 sm:grid-cols-[auto_1fr] sm:items-center">
+        <RadialProgress value={overallPct} size={120} strokeWidth={9} className="mx-auto sm:mx-0">
+          <div className="text-center">
+            <p className="text-2xl font-bold">{overallPct}%</p>
+            <p className="text-[0.65rem] text-muted-foreground">complété</p>
+          </div>
+        </RadialProgress>
+        <div>
+          <p className="font-medium">Progression globale</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {modulesReadCount}/{sortedModules.length} modules lus · {categoriesTested}/
+            {quizCategories.length} catégories de quiz testées.
+          </p>
+          {nextModule ? (
+            <Button className="mt-4" render={<Link href={`/apprendre/${nextModule.slug}`} />}>
+              Continuer avec « {nextModule.title} »
+              <ArrowRight className="size-4" />
+            </Button>
+          ) : (
+            <Button className="mt-4" render={<Link href="/quiz/examen" />}>
+              Tous les modules sont lus — lancer l&apos;examen complet
+              <ArrowRight className="size-4" />
+            </Button>
+          )}
+        </div>
+      </div>
+
       <div className="mb-10 grid gap-4 sm:grid-cols-3">
         <StatCard
           icon={<BookOpen className="size-5" />}
@@ -112,25 +140,6 @@ export function ProgressDashboard() {
         />
       </div>
 
-      <div className="mb-10 rounded-xl border border-border bg-card p-5">
-        <div className="mb-2 flex items-center justify-between text-sm">
-          <span className="font-medium">Progression globale</span>
-          <span className="text-muted-foreground">{overallPct}%</span>
-        </div>
-        <Progress value={overallPct} />
-        {nextModule ? (
-          <Button className="mt-4" render={<Link href={`/apprendre/${nextModule.slug}`} />}>
-            Continuer avec « {nextModule.title} »
-            <ArrowRight className="size-4" />
-          </Button>
-        ) : (
-          <Button className="mt-4" render={<Link href="/quiz/examen" />}>
-            Tous les modules sont lus — lancer l&apos;examen complet
-            <ArrowRight className="size-4" />
-          </Button>
-        )}
-      </div>
-
       <div className="grid gap-8 lg:grid-cols-2">
         <section>
           <h2 className="mb-4 text-lg font-semibold">Modules</h2>
@@ -139,7 +148,12 @@ export function ProgressDashboard() {
               const isRead = readSet.has(m.slug);
               return (
                 <Link key={m.slug} href={`/apprendre/${m.slug}`}>
-                  <Card className="transition-colors hover:border-primary/40">
+                  <Card
+                    className={cn(
+                      "card-hover border-l-2 hover:border-primary/40",
+                      isRead ? "border-l-emerald-500/50" : "border-l-transparent"
+                    )}
+                  >
                     <CardContent className="flex items-center gap-3 py-3">
                       {isRead ? (
                         <CheckCircle2 className="size-4 shrink-0 text-emerald-600" />
@@ -166,7 +180,12 @@ export function ProgressDashboard() {
               const pct = entry ? Math.round((entry.score / entry.total) * 100) : null;
               return (
                 <Link key={c.slug} href={`/quiz/${c.slug}`}>
-                  <Card className="transition-colors hover:border-primary/40">
+                  <Card
+                    className={cn(
+                      "card-hover border-l-2 hover:border-primary/40",
+                      entry ? "border-l-emerald-500/50" : "border-l-transparent"
+                    )}
+                  >
                     <CardContent className="flex items-center gap-3 py-3">
                       {entry ? (
                         <CheckCircle2 className="size-4 shrink-0 text-emerald-600" />
@@ -200,8 +219,8 @@ function StatCard({
   label: string;
 }) {
   return (
-    <div className="flex items-center gap-4 rounded-xl border border-border bg-card p-5">
-      <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+    <div className="card-hover flex items-center gap-4 rounded-xl border border-border bg-card p-5">
+      <span className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary/15 to-chart-5/15 text-primary">
         {icon}
       </span>
       <div>

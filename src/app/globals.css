@@ -149,6 +149,30 @@
         transparent
       );
   }
+
+  .bg-dot-grid {
+    background-image: radial-gradient(
+      color-mix(in oklch, var(--foreground) 16%, transparent) 1px,
+      transparent 1px
+    );
+    background-size: 24px 24px;
+    mask-image: radial-gradient(60% 60% at 50% 0%, black, transparent);
+  }
+
+  .card-hover {
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease,
+      border-color 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 16px 32px -16px color-mix(in oklch, var(--brand) 30%, transparent);
+  }
+
+  .focus-ring-pop {
+    transition: box-shadow 0.2s ease;
+  }
 }
 
 /* Coloration syntaxique minimale pour les blocs de code (rehype-highlight) */

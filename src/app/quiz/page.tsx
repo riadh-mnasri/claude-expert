@@ -26,10 +26,11 @@ export default function QuizHubPage() {
       </div>
 
       <Link href="/quiz/examen" className="mb-8 block">
-        <Card className="border-primary/30 bg-primary/5 transition-all hover:shadow-md">
-          <CardContent className="flex items-center justify-between gap-4 pt-6">
+        <Card className="card-hover relative overflow-hidden border-primary/30 bg-gradient-to-br from-primary/10 via-primary/5 to-chart-5/10">
+          <div className="bg-dot-grid absolute inset-0 opacity-40" />
+          <CardContent className="relative flex items-center justify-between gap-4 pt-6">
             <div className="flex items-center gap-4">
-              <span className="flex size-12 items-center justify-center rounded-xl bg-primary text-primary-foreground">
+              <span className="flex size-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-chart-5 text-primary-foreground shadow-md shadow-primary/20">
                 <Flame className="size-5" />
               </span>
               <div>
@@ -49,10 +50,10 @@ export default function QuizHubPage() {
           const count = getQuestionCountByCategory(c.slug);
           return (
             <Link key={c.slug} href={`/quiz/${c.slug}`}>
-              <Card className="h-full transition-all hover:border-primary/40 hover:shadow-md">
+              <Card className="card-hover h-full border-border/60 hover:border-primary/40">
                 <CardContent className="pt-6">
                   <div className="flex items-start justify-between">
-                    <span className="flex size-10 items-center justify-center rounded-lg bg-accent text-accent-foreground">
+                    <span className="flex size-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary/15 to-chart-5/15 text-primary">
                       <DynamicIcon name={c.icon} className="size-5" />
                     </span>
                     <span className="flex items-center gap-1 text-xs text-muted-foreground">

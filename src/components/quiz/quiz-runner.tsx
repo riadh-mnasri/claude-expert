@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { RadialProgress } from "@/components/radial-progress";
 import { cn } from "@/lib/utils";
 import { persistQuizScore } from "@/lib/progress-storage";
 import type { QuizQuestion } from "@/lib/types";
@@ -120,17 +121,24 @@ export function QuizRunner({
   if (finished) {
     const finalScore = answers.filter((a) => a.correct).length;
     const pct = Math.round((finalScore / order.length) * 100);
+    const tier =
+      pct >= 80
+        ? { ring: "stroke-emerald-500", icon: "text-emerald-600 bg-emerald-500/10" }
+        : pct >= 50
+          ? { ring: "stroke-amber-500", icon: "text-amber-600 bg-amber-500/10" }
+          : { ring: "stroke-rose-500", icon: "text-rose-600 bg-rose-500/10" };
     return (
       <div className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6">
-        <span className="mx-auto mb-6 flex size-16 items-center justify-center rounded-full bg-primary/10 text-primary">
-          <Trophy className="size-7" />
-        </span>
+        <RadialProgress value={pct} size={128} strokeWidth={10} indicatorClassName={tier.ring} className="mx-auto mb-6">
+          <span className={cn("flex size-16 items-center justify-center rounded-full", tier.icon)}>
+            <Trophy className="size-7" />
+          </span>
+        </RadialProgress>
         <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Résultat : {title}</h1>
         <p className="mt-3 text-lg text-muted-foreground">
           Score : <span className="font-semibold text-foreground">{finalScore}</span> /{" "}
           {order.length} ({pct}%)
         </p>
-        <Progress value={pct} className="mx-auto mt-4 max-w-sm" />
 
         <div className="mt-10 space-y-4 text-left">
           <h2 className="text-lg font-semibold">Révision détaillée</h2>
@@ -195,7 +203,7 @@ export function QuizRunner({
         <Progress value={progressPct} />
       </div>
 
-      <Card>
+      <Card key={current.id} className="animate-in fade-in-0 slide-in-from-bottom-2 shadow-sm duration-300">
         <CardContent className="pt-6">
           <div className="mb-4 flex items-center justify-between">
             <Badge
@@ -220,11 +228,11 @@ export function QuizRunner({
                   disabled={revealed}
                   onClick={() => setSelected(i)}
                   className={cn(
-                    "flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-colors",
+                    "flex items-center gap-3 rounded-lg border px-4 py-3 text-left text-sm transition-all",
                     !revealed &&
                       isSelected &&
                       "border-primary bg-primary/5 ring-1 ring-primary",
-                    !revealed && !isSelected && "border-border hover:border-primary/40",
+                    !revealed && !isSelected && "border-border hover:border-primary/40 hover:bg-muted/40",
                     revealed && isCorrectOption && "border-emerald-500 bg-emerald-500/10",
                     revealed &&
                       isSelected &&
@@ -233,12 +241,24 @@ export function QuizRunner({
                     revealed && !isSelected && !isCorrectOption && "border-border opacity-60"
                   )}
                 >
-                  {revealed && isCorrectOption && (
-                    <CheckCircle2 className="size-4 shrink-0 text-emerald-600" />
-                  )}
-                  {revealed && isSelected && !isCorrectOption && (
-                    <XCircle className="size-4 shrink-0 text-rose-600" />
-                  )}
+                  <span
+                    className={cn(
+                      "flex size-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold transition-colors",
+                      !revealed && isSelected && "bg-primary text-primary-foreground",
+                      !revealed && !isSelected && "bg-muted text-muted-foreground",
+                      revealed && isCorrectOption && "bg-emerald-500 text-white",
+                      revealed && isSelected && !isCorrectOption && "bg-rose-500 text-white",
+                      revealed && !isSelected && !isCorrectOption && "bg-muted text-muted-foreground"
+                    )}
+                  >
+                    {revealed && isCorrectOption ? (
+                      <CheckCircle2 className="size-3.5" />
+                    ) : revealed && isSelected && !isCorrectOption ? (
+                      <XCircle className="size-3.5" />
+                    ) : (
+                      String.fromCharCode(65 + i)
+                    )}
+                  </span>
                   <span>{option}</span>
                 </button>
               );
@@ -246,7 +266,7 @@ export function QuizRunner({
           </div>
 
           {revealed && (
-            <div className="mt-5 rounded-lg bg-secondary/50 p-4 text-sm">
+            <div className="mt-5 animate-in fade-in-0 rounded-lg bg-secondary/50 p-4 text-sm">
               <p className="font-medium">Explication</p>
               <p className="mt-1 text-muted-foreground">{current.explanation}</p>
             </div>

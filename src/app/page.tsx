@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, ListChecks, Sparkles } from "lucide-react";
+import { ArrowRight, CheckCircle2, ListChecks } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DynamicIcon } from "@/components/dynamic-icon";
-import { LevelBadge } from "@/components/level-badge";
+import { ModuleCard } from "@/components/module-card";
 import { modules } from "@/lib/modules";
 import { quizCategories } from "@/lib/quiz-categories";
 import { quizQuestions } from "@/lib/quiz-data";
@@ -16,10 +16,17 @@ export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Hero */}
-      <section className="bg-hero-glow border-b border-border/60">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-20 text-center sm:px-6 sm:py-28">
-          <Badge variant="outline" className="gap-2 border-primary/30 bg-primary/5 px-3 py-1 text-primary">
-            <Sparkles className="size-3.5" />
+      <section className="relative overflow-hidden border-b border-border/60">
+        <div className="bg-hero-glow bg-dot-grid absolute inset-0" />
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-8 px-4 py-20 text-center sm:px-6 sm:py-28">
+          <Badge
+            variant="outline"
+            className="gap-2 border-primary/30 bg-background/80 px-3 py-1 text-primary shadow-sm backdrop-blur-sm"
+          >
+            <span className="relative flex size-1.5">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary/60" />
+              <span className="relative inline-flex size-1.5 rounded-full bg-primary" />
+            </span>
             Une formation indépendante de WeHighTech sur Claude Code
           </Badge>
 
@@ -38,11 +45,11 @@ export default function Home() {
           </p>
 
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button size="lg" render={<Link href="/apprendre" />}>
+            <Button size="lg" className="shadow-lg shadow-primary/20" render={<Link href="/apprendre" />}>
               Commencer à apprendre
               <ArrowRight className="size-4" />
             </Button>
-            <Button size="lg" variant="outline" render={<Link href="/quiz" />}>
+            <Button size="lg" variant="outline" className="bg-background/80 backdrop-blur-sm" render={<Link href="/quiz" />}>
               <ListChecks className="size-4" />
               Tester mes connaissances
             </Button>
@@ -94,24 +101,7 @@ export default function Home() {
 
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {sortedModules.map((m) => (
-              <Link key={m.slug} href={`/apprendre/${m.slug}`} className="group">
-                <Card className="h-full transition-all hover:border-primary/40 hover:shadow-md">
-                  <CardHeader>
-                    <div className="flex items-start justify-between">
-                      <span className="flex size-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                        <DynamicIcon name={m.icon} className="size-5" />
-                      </span>
-                      <LevelBadge level={m.level} />
-                    </div>
-                    <CardTitle className="pt-2 text-base leading-snug">
-                      {m.order}. {m.title}
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">{m.summary}</p>
-                  </CardContent>
-                </Card>
-              </Link>
+              <ModuleCard key={m.slug} module={m} />
             ))}
           </div>
         </div>
@@ -137,7 +127,7 @@ export default function Home() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {quizCategories.map((c) => (
             <Link key={c.slug} href={`/quiz/${c.slug}`}>
-              <Card className="h-full transition-all hover:border-primary/40 hover:shadow-md">
+              <Card className="card-hover h-full border-border/60 hover:border-primary/40">
                 <CardContent className="flex items-start gap-3 pt-6">
                   <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-accent text-accent-foreground">
                     <DynamicIcon name={c.icon} className="size-4" />
@@ -154,8 +144,9 @@ export default function Home() {
       </section>
 
       {/* CTA finale */}
-      <section className="border-t border-border/60 bg-primary text-primary-foreground">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-16 text-center sm:px-6">
+      <section className="relative overflow-hidden border-t border-border/60 bg-primary text-primary-foreground">
+        <div className="bg-dot-grid absolute inset-0 opacity-20" />
+        <div className="relative mx-auto flex max-w-6xl flex-col items-center gap-6 px-4 py-16 text-center sm:px-6">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
             Prêt à devenir expert Claude Code ?
           </h2>
@@ -163,7 +154,7 @@ export default function Home() {
             Commencez par le module « Qu&apos;est-ce que Claude Code ? », puis enchaînez les
             modules dans l&apos;ordre pour une progression cohérente.
           </p>
-          <Button size="lg" variant="secondary" render={<Link href="/apprendre/introduction" />}>
+          <Button size="lg" variant="secondary" className="shadow-lg" render={<Link href="/apprendre/introduction" />}>
             Démarrer le module 1
             <ArrowRight className="size-4" />
           </Button>
@@ -175,7 +166,7 @@ export default function Home() {
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (
-    <div className="rounded-xl border border-border/60 bg-card/60 px-4 py-3">
+    <div className="rounded-xl border border-border/60 bg-card/70 px-4 py-3 shadow-sm backdrop-blur-sm">
       <p className="text-2xl font-bold text-primary">{value}</p>
       <p className="text-xs text-muted-foreground">{label}</p>
     </div>
@@ -184,8 +175,10 @@ function Stat({ value, label }: { value: string; label: string }) {
 
 function FeaturePoint({ title, description }: { title: string; description: string }) {
   return (
-    <div className="flex gap-3 rounded-xl border border-border/60 bg-card p-5">
-      <CheckCircle2 className="size-5 shrink-0 text-primary" />
+    <div className="card-hover flex gap-3 rounded-xl border border-border/60 bg-card p-5">
+      <span className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary/15 to-chart-5/15 text-primary">
+        <CheckCircle2 className="size-5" />
+      </span>
       <div>
         <p className="font-semibold">{title}</p>
         <p className="mt-1 text-sm text-muted-foreground">{description}</p>

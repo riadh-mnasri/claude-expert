@@ -8,6 +8,8 @@ import { DynamicIcon } from "@/components/dynamic-icon";
 import { LevelBadge } from "@/components/level-badge";
 import { MarkdownContent } from "@/components/markdown-content";
 import { MarkModuleRead } from "@/components/mark-module-read";
+import { ModuleToc } from "@/components/module-toc";
+import { ReadingProgressBar } from "@/components/reading-progress-bar";
 import { getAdjacentModules, getModuleBySlug, modules } from "@/lib/modules";
 import { getQuestionCountByCategory } from "@/lib/quiz-data";
 
@@ -40,9 +42,14 @@ export default async function ModulePage({
 
   const { prev, next } = getAdjacentModules(mod.slug);
   const questionCount = getQuestionCountByCategory(mod.slug);
+  const headings = mod.sections.map((section) => ({
+    id: slugify(section.heading),
+    label: section.heading,
+  }));
 
   return (
     <div className="mx-auto grid max-w-6xl gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_260px]">
+      <ReadingProgressBar />
       <MarkModuleRead slug={mod.slug} />
       <article>
         <Link
@@ -54,7 +61,7 @@ export default async function ModulePage({
         </Link>
 
         <div className="mb-4 flex items-center gap-3">
-          <span className="flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+          <span className="flex size-11 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-chart-5/15 text-primary">
             <DynamicIcon name={mod.icon} className="size-5" />
           </span>
           <div>
@@ -90,12 +97,12 @@ export default async function ModulePage({
 
         <Separator className="my-8" />
 
-        <div className="rounded-xl border border-primary/20 bg-primary/5 p-6">
+        <div className="rounded-xl border border-primary/20 bg-gradient-to-br from-primary/8 to-chart-5/5 p-6">
           <h3 className="mb-3 flex items-center gap-2 font-semibold">
             <CheckCircle2 className="size-4 text-primary" />
             Points clés à retenir
           </h3>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-2.5 text-sm">
             {mod.keyTakeaways.map((t) => (
               <li key={t} className="flex gap-2">
                 <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" />
@@ -107,7 +114,7 @@ export default async function ModulePage({
 
         {questionCount > 0 && (
           <Link href={`/quiz/${mod.slug}`} className="mt-6 block">
-            <div className="flex items-center justify-between rounded-xl border border-border bg-card p-5 transition-colors hover:border-primary/40">
+            <div className="card-hover flex items-center justify-between rounded-xl border border-border bg-card p-5 hover:border-primary/40">
               <div className="flex items-center gap-3">
                 <span className="flex size-9 items-center justify-center rounded-lg bg-accent text-accent-foreground">
                   <ListChecks className="size-4" />
@@ -126,17 +133,21 @@ export default async function ModulePage({
 
         <div className="mt-10 flex items-center justify-between gap-4">
           {prev ? (
-            <Button variant="outline" render={<Link href={`/apprendre/${prev.slug}`} />}>
-              <ArrowLeft className="size-4" />
-              {prev.title}
+            <Button
+              variant="outline"
+              className="max-w-[48%] justify-start"
+              render={<Link href={`/apprendre/${prev.slug}`} />}
+            >
+              <ArrowLeft className="size-4 shrink-0" />
+              <span className="truncate">{prev.title}</span>
             </Button>
           ) : (
             <span />
           )}
           {next && (
-            <Button render={<Link href={`/apprendre/${next.slug}`} />}>
-              {next.title}
-              <ArrowRight className="size-4" />
+            <Button className="max-w-[48%] justify-end" render={<Link href={`/apprendre/${next.slug}`} />}>
+              <span className="truncate">{next.title}</span>
+              <ArrowRight className="size-4 shrink-0" />
             </Button>
           )}
         </div>
@@ -147,17 +158,7 @@ export default async function ModulePage({
           <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
             Au sommaire
           </p>
-          <nav className="flex flex-col gap-1 border-l border-border pl-4 text-sm">
-            {mod.sections.map((section) => (
-              <a
-                key={section.heading}
-                href={`#${slugify(section.heading)}`}
-                className="py-1 text-muted-foreground hover:text-foreground"
-              >
-                {section.heading}
-              </a>
-            ))}
-          </nav>
+          <ModuleToc headings={headings} />
         </div>
       </aside>
     </div>
