@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site-config";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,9 +17,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Claude Expert — Devenez expert de Claude Code | Une formation WeHighTech",
-  description:
-    "Une formation indépendante de WeHighTech pour devenir expert de Claude Code : bases, CLAUDE.md, Skills, MCP, Agents, Hooks, Plan Mode, bonnes pratiques. Avec quiz corrigés pour valider vos acquis.",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Claude Expert — Devenez expert de Claude Code | Une formation WeHighTech",
+    template: `%s | ${SITE_NAME}`,
+  },
+  description: SITE_DESCRIPTION,
+  openGraph: {
+    title: "Claude Expert — Devenez expert de Claude Code",
+    description: SITE_DESCRIPTION,
+    url: SITE_URL,
+    siteName: SITE_NAME,
+    locale: "fr_FR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Claude Expert — Devenez expert de Claude Code",
+    description: SITE_DESCRIPTION,
+  },
 };
 
 export default function RootLayout({
