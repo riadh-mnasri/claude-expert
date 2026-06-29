@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, ListChecks } from "lucide-react";
+import { ArrowRight, BookMarked, CheckCircle2, ListChecks, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -8,6 +8,7 @@ import { ModuleCard } from "@/components/module-card";
 import { modules } from "@/lib/modules";
 import { quizCategories } from "@/lib/quiz-categories";
 import { quizQuestions } from "@/lib/quiz-data";
+import { fiches, nouveautes } from "@/lib/fiches-data";
 
 export default function Home() {
   const sortedModules = [...modules].sort((a, b) => a.order - b.order);
@@ -140,6 +141,59 @@ export default function Home() {
               </Card>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* Fiches teaser */}
+      <section className="border-t border-border/60 py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+            <div>
+              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                Fiches de révision & Nouveautés
+              </h2>
+              <p className="mt-2 text-muted-foreground">
+                Référence rapide à garder sous la main, et le journal de toutes les évolutions de Claude.
+              </p>
+            </div>
+            <Button variant="ghost" render={<Link href="/fiches" />}>
+              Explorer les fiches
+              <ArrowRight className="size-4" />
+            </Button>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <Link href="/fiches">
+              <Card className="card-hover h-full border-border/60 hover:border-primary/40">
+                <CardContent className="flex items-start gap-3 pt-6">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-accent text-accent-foreground">
+                    <BookMarked className="size-4" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold">Fiches de révision</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {fiches.length} fiches de référence : commandes slash, raccourcis, CLAUDE.md, Hooks, MCP, Agents, Skills.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/fiches">
+              <Card className="card-hover h-full border-border/60 hover:border-primary/40">
+                <CardContent className="flex items-start gap-3 pt-6">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-md bg-accent text-accent-foreground">
+                    <Sparkles className="size-4" />
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold">Nouveautés Claude</p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      {nouveautes.length} mises à jour : Fable 5, famille Claude 4, Fast Mode, agents planifiés, boucles autonomes…
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
         </div>
       </section>
 
