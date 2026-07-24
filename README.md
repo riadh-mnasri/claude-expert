@@ -1,8 +1,8 @@
 # Claude Expert
 
-A polished, content-rich learning platform to go from zero to expert on **Claude Code** — Anthropic's agentic coding CLI. Built with Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui.
+A polished, content-rich learning platform to go from zero to expert on **Claude Code**, Anthropic's agentic coding CLI. Built with Next.js (App Router), TypeScript, Tailwind CSS, and shadcn/ui.
 
-An independent training published by **WeHighTech** — not affiliated with, sponsored by, or endorsed by Anthropic. "Claude" and "Claude Code" are trademarks of Anthropic, PBC.
+An independent training published by **WeHighTech**, not affiliated with, sponsored by, or endorsed by Anthropic. "Claude" and "Claude Code" are trademarks of Anthropic, PBC.
 
 > 🇫🇷 All learning content (modules, quiz questions, UI copy) is written in French.
 
@@ -25,11 +25,11 @@ An independent training published by **WeHighTech** — not affiliated with, spo
 
 The site has three main sections:
 
-- **Apprendre** (`/apprendre`) — 12 ordered modules covering everything from first launch to advanced mechanics: CLI & REPL, `CLAUDE.md` & memory, built-in tools, permissions & security, Skills, MCP (Model Context Protocol), Agents & sub-agents, Hooks, Plan Mode, and advanced best practices. Each module page renders markdown sections with a sticky table of contents, prev/next navigation, and a "mark as read" action.
-- **Quiz** (`/quiz`) — 144 multiple-choice questions (12 per category, across 12 categories), each with the correct answer and a detailed explanation. Includes a full "exam mode" mixing every question, immediate per-question feedback, a final score/review screen, and per-category progress badges.
-- **Progression** (`/progression`) — a personal dashboard aggregating modules read and quiz scores per category, so learners can see at a glance what's left to cover and where they're weakest.
+- **Apprendre** (`/apprendre`): 12 ordered modules covering everything from first launch to advanced mechanics: CLI & REPL, `CLAUDE.md` & memory, built-in tools, permissions & security, Skills, MCP (Model Context Protocol), Agents & sub-agents, Hooks, Plan Mode, and advanced best practices. Each module page renders markdown sections with a sticky table of contents, prev/next navigation, and a "mark as read" action.
+- **Quiz** (`/quiz`): 144 multiple-choice questions (12 per category, across 12 categories), each with the correct answer and a detailed explanation. Includes a full "exam mode" mixing every question, immediate per-question feedback, a final score/review screen, and per-category progress badges.
+- **Progression** (`/progression`): a personal dashboard aggregating modules read and quiz scores per category, so learners can see at a glance what's left to cover and where they're weakest.
 
-All progress is tracked client-side via `localStorage` — there is no backend, account system, or database.
+All progress is tracked client-side via `localStorage`. There is no backend, account system, or database.
 
 ## Tech stack
 
@@ -76,7 +76,7 @@ src/
 │   └── utils.ts                   # `cn()` class merge helper
 ```
 
-All educational content (modules and quiz questions) is plain TypeScript data — no CMS, no database. Adding a module or a question is just adding an entry to the corresponding file in `src/lib`.
+All educational content (modules and quiz questions) is plain TypeScript data: no CMS, no database. Adding a module or a question is just adding an entry to the corresponding file in `src/lib`.
 
 ## Content model
 
@@ -95,7 +95,7 @@ All educational content (modules and quiz questions) is plain TypeScript data �
 | 5 | Outils intégrés | `outils` |
 | 6 | Permissions & sécurité | `permissions` |
 | 7 | Skills | `skills` |
-| 8 | MCP — Model Context Protocol | `mcp` |
+| 8 | MCP: Model Context Protocol | `mcp` |
 | 9 | Agents & sous-agents | `agents` |
 | 10 | Hooks | `hooks` |
 | 11 | Plan Mode & workflow | `plan-mode` |
@@ -109,10 +109,10 @@ Each of the 12 categories above has a matching quiz bank of 12 questions (144 to
 
 Progress lives entirely in the browser (`src/lib/progress-storage.ts`):
 
-- `claude-expert-modules-read` — the set of module slugs the learner has marked as read.
-- `claude-expert-quiz-progress` — the latest `{ score, total, date }` per quiz category.
+- `claude-expert-modules-read`: the set of module slugs the learner has marked as read.
+- `claude-expert-quiz-progress`: the latest `{ score, total, date }` per quiz category.
 
-Reads use `useSyncExternalStore`-compatible cached snapshots so the UI stays consistent during SSR and hydration. The `/progression` dashboard (`ProgressDashboard` component) reads both keys to show overall completion, per-module status, and per-category quiz scores. There's no sync across devices or browsers — clearing site data resets progress.
+Reads use `useSyncExternalStore`-compatible cached snapshots so the UI stays consistent during SSR and hydration. The `/progression` dashboard (`ProgressDashboard` component) reads both keys to show overall completion, per-module status, and per-category quiz scores. There's no sync across devices or browsers: clearing site data resets progress.
 
 ## Getting started
 
@@ -137,9 +137,9 @@ Open [http://localhost:3000](http://localhost:3000).
 **A new learning module**
 
 1. Add an entry to the array in `src/lib/modules.ts` with a unique `slug` and the next `order`.
-2. Pick a [lucide](https://lucide.dev) icon name for `icon` — it's resolved at runtime by `src/components/dynamic-icon.tsx`.
+2. Pick a [lucide](https://lucide.dev) icon name for `icon`. It's resolved at runtime by `src/components/dynamic-icon.tsx`.
 3. Write `sections` as markdown strings and a short `keyTakeaways` list.
-4. The module list, detail page, sticky TOC, and prev/next links update automatically — no routing changes needed.
+4. The module list, detail page, sticky TOC, and prev/next links update automatically: no routing changes needed.
 
 **A new quiz question**
 
@@ -162,4 +162,4 @@ It can also be self-hosted with `npm run build && npm run start` on any Node.js 
 
 This project is provided for personal learning purposes.
 
-© 2026 WeHighTech — Riadh MNASRI. All rights reserved.
+© 2026 WeHighTech, Riadh MNASRI. All rights reserved.
