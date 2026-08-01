@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { FichesTabs } from "@/components/fiches-tabs";
 
 export const metadata: Metadata = {
-  title: "Fiches de révision — Claude Expert",
+  title: "Fiches de révision",
   description:
-    "Référence rapide sur Claude Code : commandes slash, raccourcis, CLAUDE.md, Hooks, MCP, Agents, Skills — plus le journal des dernières nouveautés Claude.",
+    "Référence rapide sur Claude Code : commandes slash, raccourcis, CLAUDE.md, Hooks, MCP, Agents, Skills, plus le journal des dernières nouveautés Claude.",
 };
 
 export default function FichesPage() {
@@ -16,7 +16,7 @@ export default function FichesPage() {
         </h1>
         <p className="mt-3 text-muted-foreground">
           Référence rapide à garder sous la main : commandes, raccourcis, configurations et
-          patterns essentiels — plus le journal de toutes les évolutions de Claude et Claude Code.
+          patterns essentiels, plus le journal de toutes les évolutions de Claude et Claude Code.
         </p>
       </div>
 

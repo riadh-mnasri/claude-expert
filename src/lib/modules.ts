@@ -15,7 +15,7 @@ export const modules: Module[] = [
         heading: "Définition",
         body: `Claude Code est un agent de codage en ligne de commande (CLI) développé par Anthropic. Il s'exécute directement dans votre terminal, a accès au système de fichiers de votre projet et peut exécuter des commandes shell, ce qui lui permet de **lire, écrire, exécuter et corriger du code** de façon autonome, en collaboration avec vous.
 
-Contrairement à un simple chatbot, Claude Code est un **agent** : il peut planifier plusieurs étapes, utiliser des outils (lire un fichier, lancer des tests, faire un \`git diff\`...), observer les résultats, et ajuster son comportement en conséquence — le tout en boucle jusqu'à ce que la tâche soit terminée.`,
+Contrairement à un simple chatbot, Claude Code est un **agent** : il peut planifier plusieurs étapes, utiliser des outils (lire un fichier, lancer des tests, faire un \`git diff\`...), observer les résultats, et ajuster son comportement en conséquence, le tout en boucle jusqu'à ce que la tâche soit terminée.`,
       },
       {
         heading: "Où il s'exécute",
@@ -43,17 +43,17 @@ Cette boucle **agentique** (souvent appelée *agentic loop*) est le cœur de Cla
         heading: "Les briques que vous allez maîtriser",
         body: `Ce parcours de formation couvre, dans l'ordre, tous les concepts nécessaires pour devenir expert :
 
-1. **Installation & prise en main** — lancer Claude Code, comprendre le REPL
-2. **CLI, REPL & commandes slash** — les commandes intégrées (\`/help\`, \`/clear\`, \`/compact\`...)
-3. **CLAUDE.md & mémoire** — donner du contexte persistant à l'agent
-4. **Outils intégrés** — Read, Edit, Write, Bash, Grep, Glob, Task...
-5. **Permissions & sécurité** — modes de permission, sandboxing
-6. **Skills** — capacités modulaires invocables à la demande
-7. **MCP (Model Context Protocol)** — connecter des outils et données externes
-8. **Agents & sous-agents** — déléguer des tâches à des agents spécialisés
-9. **Hooks** — automatiser des actions autour du cycle de vie de l'agent
-10. **Plan Mode & workflow** — concevoir avant d'exécuter
-11. **Bonnes pratiques** — git, PR, CI/CD, gros refactors, sécurité
+1. **Installation & prise en main** : lancer Claude Code, comprendre le REPL
+2. **CLI, REPL & commandes slash** : les commandes intégrées (\`/help\`, \`/clear\`, \`/compact\`...)
+3. **CLAUDE.md & mémoire** : donner du contexte persistant à l'agent
+4. **Outils intégrés** : Read, Edit, Write, Bash, Grep, Glob, Task...
+5. **Permissions & sécurité** : modes de permission, sandboxing
+6. **Skills** : capacités modulaires invocables à la demande
+7. **MCP (Model Context Protocol)** : connecter des outils et données externes
+8. **Agents & sous-agents** : déléguer des tâches à des agents spécialisés
+9. **Hooks** : automatiser des actions autour du cycle de vie de l'agent
+10. **Plan Mode & workflow** : concevoir avant d'exécuter
+11. **Bonnes pratiques** : git, PR, CI/CD, gros refactors, sécurité
 
 Chaque module se termine par les points clés à retenir, et la section **Quiz** vous permet de vérifier vos acquis avec des questions corrigées.`,
       },
@@ -61,7 +61,7 @@ Chaque module se termine par les points clés à retenir, et la section **Quiz**
     keyTakeaways: [
       "Claude Code est un agent CLI qui lit, écrit et exécute du code de façon autonome.",
       "Il fonctionne en boucle agentique : planifier → agir avec des outils → observer → ajuster.",
-      "Disponible en CLI, IDE, desktop et web — même moteur partout.",
+      "Disponible en CLI, IDE, desktop et web : même moteur partout.",
       "La configuration projet (CLAUDE.md, hooks, skills, MCP) personnalise son comportement.",
     ],
   },
@@ -108,11 +108,11 @@ Claude Code va explorer le projet (lister les fichiers, lire le code pertinent),
         heading: "Modes d'exécution",
         body: `Claude Code peut être lancé de plusieurs façons :
 
-- \`claude\` — mode interactif (REPL), le plus courant
-- \`claude "corrige ce bug"\` — démarre directement avec une instruction
-- \`claude -p "résume ce repo"\` — mode *print* : exécution non-interactive, idéal pour scripts/CI
-- \`claude --continue\` — reprend la dernière conversation
-- \`claude --resume\` — choisit une session précédente à reprendre
+- \`claude\` : mode interactif (REPL), le plus courant
+- \`claude "corrige ce bug"\` : démarre directement avec une instruction
+- \`claude -p "résume ce repo"\` : mode *print*, exécution non-interactive, idéal pour scripts/CI
+- \`claude --continue\` : reprend la dernière conversation
+- \`claude --resume\` : choisit une session précédente à reprendre
 
 Le mode \`-p\` (print) est particulièrement utile pour l'automatisation : il exécute la tâche et retourne le résultat sans ouvrir de session interactive.`,
       },
@@ -138,7 +138,7 @@ Rien de tout cela n'est obligatoire pour démarrer : Claude Code fonctionne dès
     ],
     keyTakeaways: [
       "Installation via npm install -g @anthropic-ai/claude-code, lancement avec `claude`.",
-      "Le mode -p (print) exécute une tâche sans session interactive — utile en CI/scripts.",
+      "Le mode -p (print) exécute une tâche sans session interactive : utile en CI/scripts.",
       "--continue reprend la dernière session, --resume permet de choisir une session.",
       "La configuration projet vit dans CLAUDE.md et le dossier .claude/.",
     ],
@@ -176,7 +176,7 @@ Rien de tout cela n'est obligatoire pour démarrer : Claude Code fonctionne dès
         body: `Claude Code fonctionne avec une fenêtre de contexte finie. Plus une session dure, plus elle accumule de l'historique (lectures de fichiers, sorties de commandes, etc.). Deux stratégies :
 
 - \`/compact\` : demande à Claude de **résumer** la conversation en préservant les décisions et le travail en cours, puis continue avec un contexte allégé.
-- \`/clear\` : repart de zéro — utile entre deux tâches complètement indépendantes.
+- \`/clear\` : repart de zéro, utile entre deux tâches complètement indépendantes.
 
 Au-delà d'un certain remplissage, Claude Code peut **auto-compacter** automatiquement pour éviter de couper la conversation.`,
       },
@@ -238,10 +238,10 @@ Le symbole \`!\` en début de message exécute directement une commande shell da
         heading: "Hiérarchie de la mémoire",
         body: `Claude Code combine plusieurs niveaux de mémoire, du plus général au plus spécifique :
 
-1. **Mémoire utilisateur** (\`~/.claude/CLAUDE.md\`) — préférences valables sur tous vos projets
-2. **Mémoire projet** (\`./CLAUDE.md\` à la racine) — partagée avec l'équipe via git
-3. **Mémoire locale** (\`./CLAUDE.local.md\`, non commitée) — vos préférences perso sur ce projet
-4. **CLAUDE.md de sous-dossier** — contexte spécifique à un module/package dans un monorepo
+1. **Mémoire utilisateur** (\`~/.claude/CLAUDE.md\`) : préférences valables sur tous vos projets
+2. **Mémoire projet** (\`./CLAUDE.md\` à la racine) : partagée avec l'équipe via git
+3. **Mémoire locale** (\`./CLAUDE.local.md\`, non commitée) : vos préférences perso sur ce projet
+4. **CLAUDE.md de sous-dossier** : contexte spécifique à un module/package dans un monorepo
 
 Plus le fichier est « proche » du travail en cours, plus son contenu est pertinent et prioritaire en cas de conflit.`,
       },
@@ -249,7 +249,7 @@ Plus le fichier est « proche » du travail en cours, plus son contenu est perti
         heading: "Bonnes pratiques de rédaction",
         body: `- Restez **concis et actionnable** : une liste de règles claires vaut mieux qu'un essai.
 - Documentez le **pourquoi**, pas seulement le quoi, quand une règle est contre-intuitive.
-- Mettez à jour le fichier quand vous corrigez Claude Code en session — ça évite de répéter la même correction.
+- Mettez à jour le fichier quand vous corrigez Claude Code en session : ça évite de répéter la même correction.
 - Évitez les répétitions trouvables dans le code (architecture déductible du code n'a pas besoin d'être réécrite).
 - Utilisez \`#\` en début de message dans le REPL pour ajouter rapidement une instruction à la mémoire sans éditer le fichier à la main.
 
@@ -329,7 +329,7 @@ Ce que cette mémoire **ne** doit **pas** contenir : tout ce qui se déduit du c
       },
       {
         heading: "Recherche : Glob et Grep",
-        body: `\`Glob\` répond à « quels fichiers correspondent à ce motif ? » (ex: tous les fichiers de test). \`Grep\` répond à « où apparaît ce symbole/texte dans le code ? ». Combinés, ils permettent à Claude Code d'explorer un repo inconnu sans avoir besoin d'un index préconstruit : il cherche, lit ce qui est pertinent, et ignore le reste — une approche qui s'adapte à des bases de code de toute taille.`,
+        body: `\`Glob\` répond à « quels fichiers correspondent à ce motif ? » (ex: tous les fichiers de test). \`Grep\` répond à « où apparaît ce symbole/texte dans le code ? ». Combinés, ils permettent à Claude Code d'explorer un repo inconnu sans avoir besoin d'un index préconstruit : il cherche, lit ce qui est pertinent, et ignore le reste : une approche qui s'adapte à des bases de code de toute taille.`,
       },
       {
         heading: "Bash et la prudence sur les actions destructrices",
@@ -382,7 +382,7 @@ L'outil **ToolSearch** permet de récupérer, à la demande, le schéma complet 
 - **Normal (par défaut)** : chaque action sensible (édition, commande shell) est confirmée par l'utilisateur.
 - **Auto-accept edits** : les éditions de fichiers sont acceptées automatiquement, les commandes shell sensibles restent confirmées.
 - **Plan Mode** : Claude Code ne fait que lire et analyser, propose un plan, et **ne modifie rien** jusqu'à validation explicite (voir module dédié).
-- **Bypass / YOLO (dangereux)** : toutes les confirmations sont désactivées — réservé à des environnements jetables et isolés (ex: conteneur sandbox).
+- **Bypass / YOLO (dangereux)** : toutes les confirmations sont désactivées, réservé à des environnements jetables et isolés (ex: conteneur sandbox).
 
 On bascule entre les modes avec **Shift+Tab** en session, ou via la configuration.`,
       },
@@ -414,7 +414,7 @@ Ces règles s'appliquent **avant** que le modèle ne décide quoi que ce soit : 
       },
       {
         heading: "Sandboxing et environnements isolés",
-        body: `Pour des tâches qui nécessitent plus de liberté (ex: exécuter du code généré, tester des commandes risquées), on peut isoler l'exécution dans un environnement jetable : conteneur Docker, VM, ou un *worktree* git séparé. Cela permet d'autoriser des actions plus larges sans risque pour l'environnement principal — c'est le même principe que les agents qui tournent avec \`isolation: "worktree"\` pour travailler sur une copie du repo.`,
+        body: `Pour des tâches qui nécessitent plus de liberté (ex: exécuter du code généré, tester des commandes risquées), on peut isoler l'exécution dans un environnement jetable : conteneur Docker, VM, ou un *worktree* git séparé. Cela permet d'autoriser des actions plus larges sans risque pour l'environnement principal : c'est le même principe que les agents qui tournent avec \`isolation: "worktree"\` pour travailler sur une copie du repo.`,
       },
     ],
     keyTakeaways: [
@@ -438,7 +438,7 @@ Ces règles s'appliquent **avant** que le modèle ne décide quoi que ce soit : 
         heading: "Qu'est-ce qu'une Skill ?",
         body: `Une **Skill** est un module de connaissance/instructions packagé (typiquement un dossier avec un fichier \`SKILL.md\` et des ressources associées : scripts, templates, exemples) que Claude Code peut **découvrir et charger dynamiquement** quand le contexte de la tâche correspond.
 
-Contrairement à \`CLAUDE.md\` (toujours chargé), une Skill n'est chargée **que si pertinente** — ce qui permet d'avoir des dizaines de capacités spécialisées sans alourdir chaque session avec du contexte inutile.`,
+Contrairement à \`CLAUDE.md\` (toujours chargé), une Skill n'est chargée **que si pertinente**, ce qui permet d'avoir des dizaines de capacités spécialisées sans alourdir chaque session avec du contexte inutile.`,
       },
       {
         heading: "Structure d'une Skill",
@@ -465,7 +465,7 @@ description: Déploie l'application sur l'environnement de staging après vérif
       },
       {
         heading: "Découverte et déclenchement",
-        body: `Claude Code maintient une liste légère (nom + description) de toutes les Skills disponibles. Quand une requête utilisateur correspond à la description d'une Skill, il **charge son contenu complet** avant d'agir — un mécanisme similaire à un appel de fonction, mais pour de la connaissance procédurale plutôt que du code.
+        body: `Claude Code maintient une liste légère (nom + description) de toutes les Skills disponibles. Quand une requête utilisateur correspond à la description d'une Skill, il **charge son contenu complet** avant d'agir : un mécanisme similaire à un appel de fonction, mais pour de la connaissance procédurale plutôt que du code.
 
 Une bonne description de Skill est donc cruciale : elle doit indiquer clairement **quand** l'utiliser (mots-clés, contexte, type de tâche) pour que la découverte fonctionne de façon fiable.`,
       },
@@ -479,7 +479,7 @@ Une bonne description de Skill est donc cruciale : elle doit indiquer clairement
 | **Sous-agent** | Un agent autonome avec son propre contexte et ses propres outils, pour déléguer une tâche entière | Un agent "Explore" en lecture seule pour chercher du code |
 | **MCP** | Une connexion à un service/outil externe (API, base de données, autre app) | Accès à GitHub, Slack, une base Postgres |
 
-Une Skill peut elle-même recommander d'utiliser un sous-agent ou un serveur MCP particulier — ces mécanismes se combinent.`,
+Une Skill peut elle-même recommander d'utiliser un sous-agent ou un serveur MCP particulier : ces mécanismes se combinent.`,
       },
     ],
     keyTakeaways: [
@@ -492,7 +492,7 @@ Une Skill peut elle-même recommander d'utiliser un sous-agent ou un serveur MCP
   {
     slug: "mcp",
     order: 8,
-    title: "MCP — Model Context Protocol",
+    title: "MCP : Model Context Protocol",
     icon: "Plug",
     level: "Avancé",
     duration: "11 min",
@@ -653,8 +653,8 @@ Différence avec les hooks (module suivant) : un hook réagit à un **événemen
         heading: "Les événements disponibles",
         body: `| Événement | Déclenché... |
 |---|---|
-| \`PreToolUse\` | avant l'exécution d'un outil — peut **bloquer** l'appel |
-| \`PostToolUse\` | après l'exécution d'un outil — peut réagir au résultat |
+| \`PreToolUse\` | avant l'exécution d'un outil : peut **bloquer** l'appel |
+| \`PostToolUse\` | après l'exécution d'un outil : peut réagir au résultat |
 | \`UserPromptSubmit\` | quand l'utilisateur envoie un message |
 | \`SessionStart\` / \`SessionEnd\` | au démarrage / à la fin d'une session |
 | \`Stop\` | quand l'agent termine sa réponse |
@@ -677,7 +677,7 @@ Différence avec les hooks (module suivant) : un hook réagit à un **événemen
 }
 \`\`\`
 
-Ici, chaque fois que Claude Code utilise \`Edit\` ou \`Write\`, Prettier reformate automatiquement le ou les fichiers concernés — sans dépendre du modèle pour s'en souvenir.`,
+Ici, chaque fois que Claude Code utilise \`Edit\` ou \`Write\`, Prettier reformate automatiquement le ou les fichiers concernés, sans dépendre du modèle pour s'en souvenir.`,
       },
       {
         heading: "Exemple : bloquer une commande dangereuse",
@@ -692,14 +692,14 @@ if echo "$CLAUDE_TOOL_INPUT" | grep -q "push --force"; then
 fi
 \`\`\`
 
-Les hooks tournent avec les **permissions de votre utilisateur système** : ils sont puissants, mais doivent être audités comme du code de production — un hook mal écrit peut bloquer (ou pire, casser) des actions légitimes.`,
+Les hooks tournent avec les **permissions de votre utilisateur système** : ils sont puissants, mais doivent être audités comme du code de production : un hook mal écrit peut bloquer (ou pire, casser) des actions légitimes.`,
       },
     ],
     keyTakeaways: [
       "Les hooks exécutent des commandes shell à des points précis du cycle de vie de l'agent.",
       "PreToolUse peut bloquer un appel d'outil ; PostToolUse réagit après coup.",
       "Ils servent à imposer des règles déterministes : formatage auto, blocage de commandes, logs.",
-      "Un hook s'exécute avec vos permissions système — à auditer comme du code de prod.",
+      "Un hook s'exécute avec vos permissions système : à auditer comme du code de prod.",
     ],
   },
   {
@@ -716,7 +716,7 @@ Les hooks tournent avec les **permissions de votre utilisateur système** : ils 
         heading: "Pourquoi planifier avant d'agir",
         body: `Pour une tâche simple (corriger une faute de frappe), planifier serait une perte de temps. Mais pour une tâche **complexe, ambiguë, ou à fort impact** (migration de base de données, refonte d'architecture, changement touchant de nombreux fichiers), agir directement risque de partir dans une mauvaise direction sans que vous puissiez intervenir à temps.
 
-Le **Plan Mode** répond à ce besoin : Claude Code explore le code, pose les questions nécessaires, puis présente un **plan détaillé** — sans modifier aucun fichier — que vous validez (ou ajustez) avant la moindre exécution.`,
+Le **Plan Mode** répond à ce besoin : Claude Code explore le code, pose les questions nécessaires, puis présente un **plan détaillé** (sans modifier aucun fichier) que vous validez (ou ajustez) avant la moindre exécution.`,
       },
       {
         heading: "Comment l'activer",
@@ -743,7 +743,7 @@ Moins utile pour :
 1. **Explorer** : laisser Claude Code lire le code pertinent (ou déléguer à un sous-agent \`Explore\`).
 2. **Planifier** : en Plan Mode, obtenir un plan clair, le challenger si besoin.
 3. **Exécuter** : valider le plan, laisser Claude Code l'implémenter étape par étape.
-4. **Vérifier** : lancer les tests, lire le diff, et — pour du code UI — observer réellement le résultat dans le navigateur plutôt que de se fier uniquement aux tests.
+4. **Vérifier** : lancer les tests, lire le diff, et, pour du code UI, observer réellement le résultat dans le navigateur plutôt que de se fier uniquement aux tests.
 
 Ce cycle réduit drastiquement les retours en arrière sur des tâches complexes.`,
       },
@@ -776,7 +776,7 @@ Ce cycle réduit drastiquement les retours en arrière sur des tâches complexes
         heading: "Revue de code et sécurité",
         body: `Avant de merger un changement généré ou assisté par Claude Code :
 - Lancez une revue (\`/review\` ou un sous-agent \`code-reviewer\`) pour détecter bugs et failles de sécurité (injection, XSS, secrets en dur).
-- Faites tourner les tests existants — et ajoutez-en si le changement n'était pas couvert.
+- Faites tourner les tests existants, et ajoutez-en si le changement n'était pas couvert.
 - Pour les changements UI, **ouvrez réellement l'application** dans un navigateur pour vérifier le chemin nominal et les cas limites ; les tests vérifient la correction du code, pas la correction de la fonctionnalité perçue par l'utilisateur.`,
       },
       {
@@ -790,7 +790,7 @@ Ce cycle réduit drastiquement les retours en arrière sur des tâches complexes
         body: `- **Donner le contexte du « pourquoi »**, pas seulement le « quoi » : Claude Code prend de meilleures décisions s'il comprend l'objectif réel.
 - **Corriger une fois, mémoriser pour toujours** : quand vous corrigez une approche, ajoutez la règle à \`CLAUDE.md\` ou à la mémoire pour ne pas la répéter.
 - **Vérifier avant de faire confiance** : pour des actions à fort impact (déploiement, migration), demander un plan avant exécution.
-- **Garder l'humain dans la boucle** sur les actions irréversibles ou visibles publiquement (push, déploiement, messages envoyés) — toujours confirmer explicitement plutôt que de présumer une autorisation tacite.`,
+- **Garder l'humain dans la boucle** sur les actions irréversibles ou visibles publiquement (push, déploiement, messages envoyés) : toujours confirmer explicitement plutôt que de présumer une autorisation tacite.`,
       },
     ],
     keyTakeaways: [

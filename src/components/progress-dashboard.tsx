@@ -115,7 +115,7 @@ export function ProgressDashboard() {
             </Button>
           ) : (
             <Button className="mt-4" render={<Link href="/quiz/examen" />}>
-              Tous les modules sont lus — lancer l&apos;examen complet
+              Tous les modules sont lus, lancer l&apos;examen complet
               <ArrowRight className="size-4" />
             </Button>
           )}
@@ -135,7 +135,7 @@ export function ProgressDashboard() {
         />
         <StatCard
           icon={<Trophy className="size-5" />}
-          value={scoredCategories.length ? `${averageScorePct}%` : "—"}
+          value={scoredCategories.length ? `${averageScorePct}%` : "N/A"}
           label="Score moyen aux quiz"
         />
       </div>

@@ -19,12 +19,12 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Claude Expert — Devenez expert de Claude Code | Une formation WeHighTech",
+    default: "Claude Expert : devenez expert de Claude Code | Une formation WeHighTech",
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
   openGraph: {
-    title: "Claude Expert — Devenez expert de Claude Code",
+    title: "Claude Expert : devenez expert de Claude Code",
     description: SITE_DESCRIPTION,
     url: SITE_URL,
     siteName: SITE_NAME,
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Claude Expert — Devenez expert de Claude Code",
+    title: "Claude Expert : devenez expert de Claude Code",
     description: SITE_DESCRIPTION,
   },
 };

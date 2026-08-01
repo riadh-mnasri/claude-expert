@@ -45,7 +45,7 @@ export const quizCategories: QuizCategory[] = [
   },
   {
     slug: "mcp",
-    title: "MCP — Model Context Protocol",
+    title: "MCP : Model Context Protocol",
     icon: "Plug",
     description: "Connexion à des outils et données externes.",
   },

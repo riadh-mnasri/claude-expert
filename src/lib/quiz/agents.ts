@@ -45,7 +45,7 @@ export const agentsQuestions: QuizQuestion[] = [
       "Un nouvel appel de sous-agent a-t-il accès à la mémoire de la conversation principale en cours ?",
     options: [
       "Oui, il voit tout l'historique automatiquement",
-      "Non, il démarre sans mémoire — tout le contexte nécessaire doit être inclus explicitement dans le prompt",
+      "Non, il démarre sans mémoire : tout le contexte nécessaire doit être inclus explicitement dans le prompt",
       "Seulement les 5 derniers messages",
       "Seulement si CLAUDE.md le précise",
     ],
@@ -105,7 +105,7 @@ export const agentsQuestions: QuizQuestion[] = [
     question: "Pourquoi un agent « Explore » est-il souvent configuré en lecture seule ?",
     options: [
       "Parce que la lecture est plus rapide techniquement",
-      "Parce que sa mission est de localiser du code, pas de le modifier — limiter ses outils réduit les risques",
+      "Parce que sa mission est de localiser du code, pas de le modifier : limiter ses outils réduit les risques",
       "Parce que les agents en lecture seule sont gratuits",
       "Parce que Claude Code l'impose par défaut à tous les agents",
     ],

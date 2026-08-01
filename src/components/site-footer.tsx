@@ -9,7 +9,7 @@ export function SiteFooter() {
         <div className="flex items-center gap-2 text-sm text-muted-foreground">
           <Sparkles className="size-4" />
           <span>
-            Claude Expert — Une formation indépendante proposée par{" "}
+            Claude Expert, une formation indépendante proposée par{" "}
             <span className="font-medium text-foreground">WeHighTech</span>, non affiliée à
             Anthropic.
           </span>
@@ -24,7 +24,7 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="border-t border-border/60 px-4 py-4 text-center text-xs text-muted-foreground sm:px-6">
-        © {year} WeHighTech — Riadh MNASRI. Tous droits réservés.
+        © {year} WeHighTech, Riadh MNASRI. Tous droits réservés.
       </div>
     </footer>
   );

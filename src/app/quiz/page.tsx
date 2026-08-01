@@ -8,7 +8,7 @@ import { quizCategories } from "@/lib/quiz-categories";
 import { getQuestionCountByCategory, quizQuestions } from "@/lib/quiz-data";
 
 export const metadata: Metadata = {
-  title: "Quiz — Claude Expert",
+  title: "Quiz",
   description:
     "Quiz complet sur Claude Code : bases, CLAUDE.md, Skills, MCP, Agents, Hooks, Plan Mode et bonnes pratiques, avec solutions et explications.",
 };

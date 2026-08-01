@@ -28,7 +28,7 @@ export async function generateMetadata({
   const resolved = resolveCategory(category);
   if (!resolved) return {};
   return {
-    title: `Quiz — ${resolved.title} — Claude Expert`,
+    title: `Quiz : ${resolved.title}`,
     description: `${resolved.questions.length} questions corrigées sur ${resolved.title}.`,
   };
 }

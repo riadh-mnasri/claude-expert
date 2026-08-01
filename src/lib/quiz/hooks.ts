@@ -113,7 +113,7 @@ export const hooksQuestions: QuizQuestion[] = [
       "Lister les commandes de build disponibles",
     ],
     answerIndex: 1,
-    explanation: "Garantir un formatage systématique est un comportement déterministe à imposer sans dépendre de l'interprétation du modèle — un cas d'usage typique de hook.",
+    explanation: "Garantir un formatage systématique est un comportement déterministe à imposer sans dépendre de l'interprétation du modèle : un cas d'usage typique de hook.",
     difficulty: "Moyen",
   },
   {

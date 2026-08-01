@@ -41,7 +41,7 @@ export default function Home() {
 
           <p className="max-w-2xl text-lg text-muted-foreground">
             {sortedModules.length} modules pour maîtriser les bases, CLAUDE.md, les Skills, MCP,
-            les Agents, les Hooks et le Plan Mode — puis {totalQuestions} questions de quiz
+            les Agents, les Hooks et le Plan Mode, puis {totalQuestions} questions de quiz
             corrigées et expliquées pour valider chaque acquis.
           </p>
 
@@ -77,7 +77,7 @@ export default function Home() {
           />
           <FeaturePoint
             title="Vérifiez vraiment vos acquis"
-            description="Chaque question de quiz est corrigée avec une explication — vous comprenez le pourquoi, pas seulement la bonne réponse."
+            description="Chaque question de quiz est corrigée avec une explication : vous comprenez le pourquoi, pas seulement la bonne réponse."
           />
         </div>
       </section>

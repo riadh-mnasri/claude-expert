@@ -3,7 +3,7 @@ import { ModuleCard } from "@/components/module-card";
 import { modules } from "@/lib/modules";
 
 export const metadata: Metadata = {
-  title: "Apprendre — Claude Expert",
+  title: "Apprendre",
   description: "Les 12 modules pour devenir expert de Claude Code, du premier lancement à l'expertise avancée.",
 };
 

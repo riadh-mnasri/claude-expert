@@ -26,7 +26,7 @@ export async function generateMetadata({
   const mod = getModuleBySlug(slug);
   if (!mod) return {};
   return {
-    title: `${mod.title} — Claude Expert`,
+    title: mod.title,
     description: mod.summary,
   };
 }

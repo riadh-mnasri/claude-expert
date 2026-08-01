@@ -70,7 +70,7 @@ export const fiches: Fiche[] = [
     category: "cli",
     categoryLabel: "CLI",
     entries: [
-      { term: "claude", desc: "Mode interactif (REPL) — le plus courant" },
+      { term: "claude", desc: "Mode interactif (REPL) : le plus courant" },
       { term: 'claude "tâche"', desc: "Démarre directement avec une instruction" },
       { term: 'claude -p "tâche"', desc: "Print mode : non-interactif, pour CI/scripts" },
       { term: "claude --continue", desc: "Reprend la dernière conversation" },
@@ -86,7 +86,7 @@ export const fiches: Fiche[] = [
     category: "config",
     categoryLabel: "Configuration",
     entries: [
-      { term: "## Commandes", desc: "Build, test, lint, déploiement — ce que vous tapez souvent" },
+      { term: "## Commandes", desc: "Build, test, lint, déploiement : ce que vous tapez souvent" },
       { term: "## Conventions", desc: "Règles de code spécifiques au projet" },
       { term: "## Architecture", desc: "Structure des dossiers, décisions techniques" },
       { term: "## Pièges connus", desc: "Comportements contre-intuitifs, gotchas" },
@@ -118,8 +118,8 @@ export const fiches: Fiche[] = [
       { term: "deny", desc: "Commandes bloquées avant toute décision du modèle" },
       { term: "Bash(pattern*)", desc: "Wildcards supportés pour les commandes shell" },
       { term: "Read(path)", desc: "Contrôle l'accès en lecture à des fichiers" },
-      { term: "settings.json", desc: "Partagé via git — règles équipe" },
-      { term: "settings.local.json", desc: "Gitignored — règles personnelles" },
+      { term: "settings.json", desc: "Partagé via git : règles équipe" },
+      { term: "settings.local.json", desc: "Gitignored : règles personnelles" },
     ],
     code: `// .claude/settings.json
 {
@@ -153,13 +153,13 @@ export const fiches: Fiche[] = [
   },
   {
     slug: "hooks-evenements",
-    title: "Hooks — Événements",
+    title: "Hooks : Événements",
     icon: "Webhook",
     category: "architecture",
     categoryLabel: "Architecture",
     entries: [
-      { term: "PreToolUse", desc: "Avant un outil — peut bloquer (exit non-nul)" },
-      { term: "PostToolUse", desc: "Après un outil — peut réagir au résultat" },
+      { term: "PreToolUse", desc: "Avant un outil : peut bloquer (exit non-nul)" },
+      { term: "PostToolUse", desc: "Après un outil : peut réagir au résultat" },
       { term: "UserPromptSubmit", desc: "Quand l'utilisateur envoie un message" },
       { term: "SessionStart", desc: "Au démarrage d'une session" },
       { term: "SessionEnd", desc: "À la fin d'une session" },
@@ -180,7 +180,7 @@ export const fiches: Fiche[] = [
   },
   {
     slug: "mcp-config",
-    title: "MCP — Configuration",
+    title: "MCP : Configuration",
     icon: "Plug",
     category: "architecture",
     categoryLabel: "Architecture",
@@ -209,7 +209,7 @@ export const fiches: Fiche[] = [
   },
   {
     slug: "agents-definition",
-    title: "Agents — Définition",
+    title: "Agents : Définition",
     icon: "Bot",
     category: "architecture",
     categoryLabel: "Architecture",
@@ -234,7 +234,7 @@ Pour chaque diff, identifie :
   },
   {
     slug: "skills-definition",
-    title: "Skills — Définition",
+    title: "Skills : Définition",
     icon: "GraduationCap",
     category: "architecture",
     categoryLabel: "Architecture",
@@ -294,7 +294,7 @@ export const nouveautes: Nouveaute[] = [
     type: "Modèle",
     impact: "majeur",
     highlights: [
-      "Nouveau modèle de pointe d'Anthropic — ID : claude-fable-5",
+      "Nouveau modèle de pointe d'Anthropic : ID : claude-fable-5",
       "Le modèle le plus récent de la gamme, succède à la famille Claude 4.x",
     ],
   },
@@ -318,7 +318,7 @@ export const nouveautes: Nouveaute[] = [
     type: "Claude Code",
     impact: "important",
     highlights: [
-      "Opus avec output accéléré — pas de downgrade vers un modèle plus petit",
+      "Opus avec output accéléré : pas de downgrade vers un modèle plus petit",
       "Activé via /fast dans le REPL, disponible sur Opus 4.8/4.7/4.6",
     ],
   },
@@ -356,7 +356,7 @@ export const nouveautes: Nouveaute[] = [
     highlights: [
       "Sessions Claude Code exécutées dans le cloud, persistantes entre déconnexions",
       "Environnements isolés (env_…) pour les agents distants",
-      "Outils : list_environments, send_later — planification asynchrone",
+      "Outils : list_environments, send_later : planification asynchrone",
     ],
   },
   {

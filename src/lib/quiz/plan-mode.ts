@@ -95,7 +95,7 @@ export const planModeQuestions: QuizQuestion[] = [
       "Demander uniquement à un sous-agent de confirmer sans observation réelle",
     ],
     answerIndex: 1,
-    explanation: "Les tests vérifient la correction du code, pas la correction perçue de la fonctionnalité — il faut observer le résultat réel.",
+    explanation: "Les tests vérifient la correction du code, pas la correction perçue de la fonctionnalité : il faut observer le résultat réel.",
     difficulty: "Moyen",
   },
   {

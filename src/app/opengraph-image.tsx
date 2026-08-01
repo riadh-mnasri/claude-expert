@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { modules } from "@/lib/modules";
 import { quizQuestions } from "@/lib/quiz-data";
 
-export const alt = "Claude Expert — Devenez expert de Claude Code";
+export const alt = "Claude Expert : devenez expert de Claude Code";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
