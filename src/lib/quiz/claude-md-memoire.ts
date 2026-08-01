@@ -149,4 +149,27 @@ export const claudeMdMemoireQuestions: QuizQuestion[] = [
     explanation: "L'ordre va du plus général (utilisateur, valable partout) au plus spécifique (sous-dossier d'un module particulier).",
     difficulty: "Moyen",
   },
+  {
+    id: "mem-13",
+    categorySlug: "claude-md-memoire",
+    question: "Quel type de mémoire correspond à une correction ou une validation donnée par l'utilisateur en session ?",
+    options: ["user", "feedback", "project", "reference"],
+    answerIndex: 1,
+    explanation: "Le type feedback capture les corrections (\"ne fais pas ça\") et les validations (\"oui, continue comme ça\") pour ne pas devoir les répéter.",
+    difficulty: "Moyen",
+  },
+  {
+    id: "mem-14",
+    categorySlug: "claude-md-memoire",
+    question: "La mémoire structurée indique qu'une fonction X existe dans un fichier Y. Que faut-il faire avant de s'appuyer dessus pour une modification ?",
+    options: [
+      "Faire confiance au souvenir sans vérification, il est forcément à jour",
+      "Vérifier l'état actuel du fichier et de la fonction, car le souvenir décrit un état passé",
+      "Ignorer systématiquement la mémoire structurée pour le code",
+      "Supprimer le souvenir avant de continuer",
+    ],
+    answerIndex: 1,
+    explanation: "Un souvenir peut devenir faux avec le temps (renommage, suppression) : mieux vaut vérifier l'état réel avant d'agir dessus, surtout s'il nomme un fichier ou une fonction précise.",
+    difficulty: "Difficile",
+  },
 ];

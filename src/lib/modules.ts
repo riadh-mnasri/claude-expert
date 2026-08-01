@@ -218,7 +218,7 @@ Le symbole \`!\` en début de message exécute directement une commande shell da
     title: "CLAUDE.md & mémoire",
     icon: "BookOpen",
     level: "Intermédiaire",
-    duration: "11 min",
+    duration: "13 min",
     summary:
       "Donner à Claude Code un contexte projet persistant : conventions, architecture, contraintes.",
     sections: [
@@ -266,14 +266,32 @@ Plus le fichier est « proche » du travail en cours, plus son contenu est perti
       },
       {
         heading: "Mémoire à long terme dans l'agent",
-        body: `Au-delà de \`CLAUDE.md\`, Claude Code peut tenir un **système de mémoire structuré** (fichiers dans un dossier dédié) pour se souvenir, entre les sessions, d'informations sur l'utilisateur, le projet et les retours qu'il a reçus (préférences de workflow, décisions prises, pièges déjà rencontrés). Cette mémoire est consultée quand elle est pertinente et mise à jour activement lorsque l'utilisateur donne un retour explicite ou que des faits durables émergent — elle se distingue de \`CLAUDE.md\` en ce qu'elle est gérée par l'agent lui-même plutôt qu'éditée manuellement.`,
+        body: `Au-delà de \`CLAUDE.md\`, Claude Code peut tenir un **système de mémoire structuré** (un fichier par souvenir, dans un dossier dédié) pour se souvenir, entre les sessions, d'informations sur l'utilisateur, le projet et les retours qu'il a reçus. Elle se distingue de \`CLAUDE.md\` sur un point essentiel : elle est **gérée par l'agent lui-même**, qui décide quand écrire un nouveau souvenir, plutôt qu'éditée manuellement par vous.
+
+Ce que cette mémoire retient se répartit en quatre types :
+
+| Type | Ce qu'il capture | Exemple |
+|---|---|---|
+| **user** | Rôle, préférences, niveau d'expertise | « Data engineer, préfère les réponses courtes et chiffrées » |
+| **feedback** | Une correction ou une validation données en session | « Ne pas mocker la base dans les tests d'intégration : incident passé en prod » |
+| **project** | Une décision ou un contexte propre à un projet en cours | « Gel des merges après le 5 mars, coupure de la branche de release mobile » |
+| **reference** | Un pointeur vers un système externe (tracker, dashboard) | « Les bugs du pipeline sont suivis dans le projet Linear "INGEST" » |
+
+Chaque souvenir est un petit fichier avec un nom, une description et son type, et un fichier **index** récapitule en une ligne chacun d'eux pour qu'ils restent repérables sans tout recharger.`,
+      },
+      {
+        heading: "Faire confiance à la mémoire, avec prudence",
+        body: `Une mémoire enregistrée un jour peut devenir fausse le lendemain : un fichier cité a pu être renommé, une fonction supprimée, une décision de projet annulée. Avant d'agir sur la base d'un souvenir, en particulier s'il nomme un chemin de fichier, une fonction ou un identifiant précis, mieux vaut **vérifier l'état actuel** (le fichier existe-t-il encore ? la fonction est-elle toujours là ?) plutôt que de supposer que le souvenir est encore exact.
+
+Ce que cette mémoire **ne** doit **pas** contenir : tout ce qui se déduit du code lui-même (conventions, architecture) ou de l'historique git (qui a changé quoi), déjà consultable directement sans avoir besoin d'être dupliqué.`,
       },
     ],
     keyTakeaways: [
       "CLAUDE.md est chargé automatiquement à chaque session : conventions, commandes, architecture.",
       "Plusieurs niveaux de mémoire (utilisateur, projet, local, sous-dossier) se combinent.",
       "/init génère une première version ; # en début de message ajoute une instruction rapide.",
-      "Une mémoire structurée et gérée par l'agent complète CLAUDE.md entre les sessions.",
+      "La mémoire structurée se répartit en quatre types : user, feedback, project, reference.",
+      "Un souvenir décrit un état passé : à vérifier avant d'agir dessus, pas à prendre pour argent comptant.",
     ],
   },
   {
@@ -282,7 +300,7 @@ Plus le fichier est « proche » du travail en cours, plus son contenu est perti
     title: "Outils intégrés",
     icon: "Wrench",
     level: "Intermédiaire",
-    duration: "10 min",
+    duration: "12 min",
     summary:
       "Comprendre les outils que Claude Code utilise pour explorer, modifier et exécuter du code.",
     sections: [
@@ -300,7 +318,8 @@ Plus le fichier est « proche » du travail en cours, plus son contenu est perti
 | **Bash** | Exécuter des commandes shell (build, tests, git...) |
 | **WebFetch / WebSearch** | Récupérer une page web ou faire une recherche |
 | **Task / Agent** | Déléguer une sous-tâche à un agent spécialisé |
-| **TodoWrite / TaskCreate** | Gérer une liste de tâches pour les travaux multi-étapes |`,
+| **TodoWrite / TaskCreate** | Gérer une liste de tâches pour les travaux multi-étapes |
+| **Artifact** | Publier une page web (HTML/Markdown) consultable via une URL |`,
       },
       {
         heading: "Pourquoi Edit plutôt que Write ?",
@@ -320,12 +339,30 @@ Plus le fichier est « proche » du travail en cours, plus son contenu est perti
 - Les commandes destructrices ou difficiles à inverser (force-push, reset --hard, suppression de fichiers) doivent être confirmées explicitement, sauf autorisation explicite de l'utilisateur.
 - Les hooks (voir module Hooks) peuvent intercepter et bloquer certaines commandes Bash avant exécution.`,
       },
+      {
+        heading: "Artifacts : publier une page web depuis l'agent",
+        body: `L'outil **Artifact** transforme un fichier HTML ou Markdown en une page web hébergée, accessible par une URL, sans quitter la conversation. C'est l'outil adapté quand un résultat se lit mieux visuellement qu'en texte brut dans le terminal : tableau de bord, rapport structuré, maquette d'interface, diagramme.
+
+Points clés à connaître :
+- Une page publiée est **privée par défaut** : c'est vous qui décidez de la partager.
+- Republier sur le **même chemin de fichier** met à jour la même URL ; un nouveau chemin crée une nouvelle page.
+- Certaines pages peuvent recevoir des **capacités d'exécution** (données à jour, état partagé entre plusieurs personnes) au-delà du HTML statique, selon ce qui est disponible pour le compte utilisé.
+- Avant de publier un fichier qu'on n'a pas soi-même écrit, il faut le lire en entier : publier revient à diffuser son contenu.`,
+      },
+      {
+        heading: "Outils différés : ToolSearch",
+        body: `Quand de nombreux serveurs MCP ou capacités additionnelles sont connectés, charger la définition complète de **chaque** outil dès le début de la session gaspillerait du contexte pour des outils qui ne serviront peut-être jamais. Claude Code peut donc lister certains outils uniquement **par leur nom**, sans leur schéma de paramètres : ce sont des outils **différés**.
+
+L'outil **ToolSearch** permet de récupérer, à la demande, le schéma complet d'un ou plusieurs outils différés à partir d'une recherche par mot-clé ou par nom exact ; c'est ce schéma qui rend l'outil appelable. Bonne pratique : regrouper en une seule recherche tous les outils différés dont une tâche va avoir besoin, plutôt que d'enchaîner les recherches une par une.`,
+      },
     ],
     keyTakeaways: [
       "Read/Edit/Write pour le code, Glob/Grep pour explorer, Bash pour exécuter.",
       "Edit (remplacement ciblé) est préféré à Write (réécriture complète) sur les fichiers existants.",
-      "Glob trouve des fichiers par motif, Grep recherche du contenu — combinés ils remplacent un index.",
+      "Glob trouve des fichiers par motif, Grep recherche du contenu : combinés, ils remplacent un index.",
       "Bash est l'outil le plus puissant : les actions destructrices doivent être confirmées.",
+      "Artifact publie une page web (privée par défaut) à partir d'un fichier HTML/Markdown.",
+      "Les outils différés n'exposent d'abord que leur nom ; ToolSearch charge leur schéma à la demande.",
     ],
   },
   {
@@ -521,7 +558,7 @@ Un serveur MCP peut tourner en **local** (process lancé sur votre machine, tran
     title: "Agents & sous-agents",
     icon: "Bot",
     level: "Avancé",
-    duration: "11 min",
+    duration: "13 min",
     summary:
       "Déléguer des tâches à des sous-agents spécialisés pour paralléliser et protéger le contexte principal.",
     sections: [
@@ -571,12 +608,31 @@ Un nouvel appel d'agent démarre **sans mémoire** de la conversation en cours :
 
 Une consigne vague produit un travail générique ; un brief précis produit un travail exploitable directement.`,
       },
+      {
+        heading: "Suivre le travail : tâches et agents en arrière-plan",
+        body: `Pour une tâche découpée en plusieurs étapes, une liste de tâches explicite (créée avec **TaskCreate**, mise à jour au fil de l'avancement) rend le travail vérifiable : chaque étape passe de « à faire » à « en cours » puis « terminée » au fur et à mesure, plutôt que de rester une intention implicite.
+
+Un sous-agent lancé **en arrière-plan** ne bloque pas la conversation : le travail continue de votre côté, et vous êtes **notifié automatiquement** quand il se termine, sans avoir besoin de revenir vérifier régulièrement. Pour suivre en direct la sortie d'un processus long déjà lancé (un build, un déploiement), l'outil **Monitor** permet de s'y attacher et de recevoir chaque nouvelle ligne comme un événement.
+
+Règle importante : tant qu'un agent en arrière-plan n'a pas renvoyé de résultat, il ne faut ni l'inventer ni le prédire ; le résultat n'existe que lorsqu'il arrive réellement.`,
+      },
+      {
+        heading: "Automatiser et planifier",
+        body: `Au-delà d'une délégation ponctuelle, un agent peut être **reprogrammé pour se réveiller plus tard** ou tourner **à intervalle régulier** :
+
+- Une boucle (par exemple via une compétence de type \`/loop\`) réexécute un même prompt à intervalle fixe, ou laisse l'agent choisir lui-même son propre rythme entre deux passages selon ce qu'il attend (un déploiement qui prend quelques minutes n'a pas besoin d'être revérifié toutes les 10 secondes).
+- Un **agent planifié** (cron) se déclenche à un horaire ou une récurrence définie à l'avance, indépendamment d'une conversation en cours : utile pour une veille régulière ou une tâche de maintenance périodique.
+
+Différence avec les hooks (module suivant) : un hook réagit à un **événement** du cycle de vie de l'agent (avant/après un outil, fin de session...), tandis que la planification se déclenche sur le **temps qui passe**, avec ou sans événement associé.`,
+      },
     ],
     keyTakeaways: [
       "Un sous-agent a son propre contexte, ses propres outils, parfois un prompt spécialisé.",
       "On délègue pour protéger le contexte principal, spécialiser le comportement, ou paralléliser.",
       "Les agents se définissent dans .claude/agents/ (nom, description, outils, prompt système).",
       "Un sous-agent démarre sans mémoire de la conversation : le prompt doit être autonome et précis.",
+      "Un agent en arrière-plan ne bloque pas la conversation : la notification arrive à la fin, sans polling.",
+      "Une boucle (/loop) répète un prompt à intervalle choisi ; un agent cron se déclenche sur un horaire fixe.",
     ],
   },
   {
