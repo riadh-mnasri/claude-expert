@@ -24,7 +24,11 @@ export function SiteFooter() {
         </nav>
       </div>
       <div className="border-t border-border/60 px-4 py-4 text-center text-xs text-muted-foreground sm:px-6">
-        © {year} WeHighTech, Riadh MNASRI. Tous droits réservés.
+        © {year} WeHighTech,{" "}
+        <a href="https://riadh-mnasri.pro" className="hover:text-foreground hover:underline">
+          Riadh MNASRI
+        </a>
+        . Tous droits réservés.
       </div>
     </footer>
   );
