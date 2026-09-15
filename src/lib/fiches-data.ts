@@ -288,14 +288,49 @@ description: Déploie l'app sur staging après
 
 export const nouveautes: Nouveaute[] = [
   {
+    id: "fable-5-1",
+    period: "1er septembre 2026",
+    title: "Claude Fable 5.1",
+    type: "Modèle",
+    impact: "majeur",
+    highlights: [
+      "Dernier modèle généralement disponible d'Anthropic : ID claude-fable-5-1",
+      "Effort par défaut variable selon le contexte : élevé dans Claude Code, moyen sur Claude Cowork et claude.ai",
+      "Sorti aux côtés de Claude Mythos 5.1",
+    ],
+  },
+  {
+    id: "opus-5",
+    period: "24 juillet 2026",
+    title: "Claude Opus 5",
+    type: "Modèle",
+    impact: "majeur",
+    highlights: [
+      "Modèle phare pour le codage agentique complexe et les usages entreprise : ID claude-opus-5",
+      "Fenêtre de contexte 1M tokens, jusqu'à 128K tokens de sortie",
+      "Réflexion adaptative par défaut, 5 niveaux d'effort configurables",
+    ],
+  },
+  {
+    id: "sonnet-5",
+    period: "30 juin 2026",
+    title: "Claude Sonnet 5",
+    type: "Modèle",
+    impact: "majeur",
+    highlights: [
+      "Modèle équilibré pour le codage agentique, l'utilisation d'outils et les workflows d'agents à moindre coût : ID claude-sonnet-5",
+      "2$ / million de tokens en entrée, 10$ / million en sortie",
+    ],
+  },
+  {
     id: "fable-5",
     period: "Juin 2026",
     title: "Claude Fable 5",
     type: "Modèle",
     impact: "majeur",
     highlights: [
-      "Nouveau modèle de pointe d'Anthropic : ID : claude-fable-5",
-      "Le modèle le plus récent de la gamme, succède à la famille Claude 4.x",
+      "Premier modèle de la famille Claude 5, ID : claude-fable-5",
+      "Succède à la famille Claude 4.x, remplacé depuis par Fable 5.1",
     ],
   },
   {
@@ -305,10 +340,22 @@ export const nouveautes: Nouveaute[] = [
     type: "Modèle",
     impact: "majeur",
     highlights: [
-      "Opus 4.8 : le plus puissant de la gamme (claude-opus-4-8)",
+      "Opus 4.8 : le plus puissant de la génération 4.x (claude-opus-4-8)",
       "Sonnet 4.6 : équilibre performance/coût (claude-sonnet-4-6)",
-      "Haiku 4.5 : le plus rapide et économique (claude-haiku-4-5-20251001)",
+      "Haiku 4.5 : le plus rapide et économique, toujours dans la gamme actuelle (claude-haiku-4-5-20251001)",
       "Remplacement complet de la famille Claude 3.x",
+    ],
+  },
+  {
+    id: "claude-cowork",
+    period: "Depuis janvier 2026",
+    title: "Claude Cowork",
+    type: "Plateforme",
+    impact: "important",
+    highlights: [
+      "Agent pensé pour les utilisateurs non techniques : automatise des workflows multi-étapes sur fichiers, dossiers et applications",
+      "Disponibilité générale entreprise depuis avril 2026 : contrôle d'accès par rôle, permissions MCP granulaires",
+      "Migré dans le cloud en juillet 2026 : accessible multi-appareils, tâches planifiées exécutables même hors ligne (avec validation finale par l'utilisateur)",
     ],
   },
   {
@@ -319,7 +366,7 @@ export const nouveautes: Nouveaute[] = [
     impact: "important",
     highlights: [
       "Opus avec output accéléré : pas de downgrade vers un modèle plus petit",
-      "Activé via /fast dans le REPL, disponible sur Opus 4.8/4.7/4.6",
+      "Activé via /fast dans le REPL, disponible sur Opus 5 et Opus 4.8",
     ],
   },
   {

@@ -187,7 +187,7 @@ export default function Home() {
                   <div>
                     <p className="text-sm font-semibold">Nouveautés Claude</p>
                     <p className="mt-1 text-xs text-muted-foreground">
-                      {nouveautes.length} mises à jour : Fable 5, famille Claude 4, Fast Mode, agents planifiés, boucles autonomes…
+                      {nouveautes.length} mises à jour : Fable 5.1, Opus 5, Sonnet 5, Claude Cowork, Fast Mode, agents planifiés…
                     </p>
                   </div>
                 </CardContent>
