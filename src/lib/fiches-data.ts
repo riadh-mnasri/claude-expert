@@ -40,6 +40,8 @@ export const fiches: Fiche[] = [
       { term: "/compact", desc: "Résume la conversation pour libérer du contexte" },
       { term: "/init", desc: "Génère un CLAUDE.md en analysant le repo" },
       { term: "/review", desc: "Lance une revue de code sur le diff courant" },
+      { term: "/code-review [niveau]", desc: "Traque les bugs (low → max, ou ultra dans le cloud)" },
+      { term: "/simplify", desc: "Simplifie le code modifié et applique les corrections" },
       { term: "/config", desc: "Configuration (modèle, thème, auto-updates…)" },
       { term: "/cost", desc: "Affiche le coût et les tokens consommés" },
       { term: "/memory", desc: "Édite directement la mémoire (CLAUDE.md)" },
@@ -452,7 +454,7 @@ export const nouveautes: Nouveaute[] = [
     highlights: [
       "/loop : exécute une tâche en boucle à cadence auto-définie par l'agent",
       "ScheduleWakeup pour se reprogrammer dynamiquement à la prochaine itération",
-      "Cache chaud < 270 s, long repos ≥ 1 200 s pour les tâches lentes ou externes",
+      "Réveil entre 60 s et 1 h (cache conservé 1 h) ; 20 à 30 min conseillées sans signal précis à surveiller",
     ],
   },
   {

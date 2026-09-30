@@ -26,7 +26,7 @@ An independent training published by **WeHighTech**, not affiliated with, sponso
 The site has three main sections:
 
 - **Apprendre** (`/apprendre`): 12 ordered modules covering everything from first launch to advanced mechanics: CLI & REPL, `CLAUDE.md` & memory, built-in tools, permissions & security, Skills, MCP (Model Context Protocol), Agents & sub-agents, Hooks, Plan Mode, and advanced best practices. Each module page renders markdown sections with a sticky table of contents, prev/next navigation, and a "mark as read" action.
-- **Quiz** (`/quiz`): 152 multiple-choice questions across 12 categories (12 per category, 15 for "Outils intégrés" and "Agents & sous-agents", 14 for "CLAUDE.md & mémoire"), each with the correct answer and a detailed explanation. Includes a full "exam mode" mixing every question, immediate per-question feedback, a final score/review screen, and per-category progress badges.
+- **Quiz** (`/quiz`): 160 multiple-choice questions across 12 categories (12 to 17 per category), each with the correct answer and a detailed explanation. Includes a full "exam mode" mixing every question, immediate per-question feedback, a final score/review screen, and per-category progress badges.
 - **Progression** (`/progression`): a personal dashboard aggregating modules read and quiz scores per category, so learners can see at a glance what's left to cover and where they're weakest.
 
 All progress is tracked client-side via `localStorage`. There is no backend, account system, or database.
@@ -103,7 +103,7 @@ All educational content (modules and quiz questions) is plain TypeScript data: n
 
 ## Quiz categories
 
-Each of the 12 categories above has a matching quiz bank (12 questions each, 15 for "Outils intégrés" and "Agents & sous-agents", 14 for "CLAUDE.md & mémoire"; 152 questions total), plus a combined "examen" mode that draws from every category.
+Each of the 12 categories above has a matching quiz bank (12 to 17 questions per category; 160 questions total), plus a combined "examen" mode that draws from every category.
 
 ## Progress tracking
 

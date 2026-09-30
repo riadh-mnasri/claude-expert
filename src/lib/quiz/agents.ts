@@ -187,4 +187,32 @@ export const agentsQuestions: QuizQuestion[] = [
     explanation: "Un hook se déclenche sur un événement (avant/après un outil, fin de session), tandis qu'un agent planifié se déclenche selon un horaire ou une récurrence, indépendamment de toute conversation en cours.",
     difficulty: "Difficile",
   },
+  {
+    id: "agent-16",
+    categorySlug: "agents",
+    question: "Quelle particularité distingue le sous-agent fork d'un sous-agent classique ?",
+    options: [
+      "Il tourne toujours en avant-plan",
+      "Il hérite de toute la conversation en cours au lieu de démarrer sans contexte",
+      "Il peut utiliser un modèle différent de celui de la session",
+      "Il ne peut que lire des fichiers",
+    ],
+    answerIndex: 1,
+    explanation: "Le fork est une copie de l'agent courant : il part avec tout le contexte, tourne en arrière-plan et garde toujours le même modèle.",
+    difficulty: "Moyen",
+  },
+  {
+    id: "agent-17",
+    categorySlug: "agents",
+    question: "Un sous-agent a terminé son travail et vous voulez lui demander une précision. Quelle est la bonne approche ?",
+    options: [
+      "Relancer un nouvel appel Agent avec la même consigne",
+      "Lui envoyer un message avec SendMessage, qui le relance avec son contexte intact",
+      "Utiliser /resume dans le REPL",
+      "C'est impossible une fois l'agent terminé",
+    ],
+    answerIndex: 1,
+    explanation: "SendMessage (avec le nom ou l'ID de l'agent, trouvable via ListAgents) reprend l'agent existant avec son contexte. Un nouvel appel Agent repartirait de zéro.",
+    difficulty: "Moyen",
+  },
 ];

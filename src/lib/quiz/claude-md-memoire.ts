@@ -172,4 +172,13 @@ export const claudeMdMemoireQuestions: QuizQuestion[] = [
     explanation: "Un souvenir peut devenir faux avec le temps (renommage, suppression) : mieux vaut vérifier l'état réel avant d'agir dessus, surtout s'il nomme un fichier ou une fonction précise.",
     difficulty: "Difficile",
   },
+  {
+    id: "mem-15",
+    categorySlug: "claude-md-memoire",
+    question: "Claude semble ignorer une consigne de votre CLAUDE.md. Quelle commande aide à repérer une règle contradictoire ou obsolète ?",
+    options: ["/init", "/doctor prompt-audit", "/compact", "/memory reset"],
+    answerIndex: 1,
+    explanation: "/doctor prompt-audit (alias /checkup prompt-audit) audite les fichiers CLAUDE.md et les skills. /init génère un premier CLAUDE.md mais n'analyse pas l'existant.",
+    difficulty: "Moyen",
+  },
 ];

@@ -125,4 +125,32 @@ export const cliReplQuestions: QuizQuestion[] = [
     explanation: "/compact résume en préservant l'essentiel du contexte utile, contrairement à /clear qui efface tout sans résumé.",
     difficulty: "Moyen",
   },
+  {
+    id: "repl-13",
+    categorySlug: "cli-repl",
+    question: "Dans Claude Code, comment activer Ultracode ?",
+    options: [
+      "En choisissant l'effort xhigh, qui l'active automatiquement",
+      "Via sa bascule dédiée dans /effort (Tab, ou /effort ultracode on)",
+      "Avec la commande /fast",
+      "En lançant claude --ultracode",
+    ],
+    answerIndex: 1,
+    explanation: "Ultracode est désormais une bascule indépendante dans /effort : il ne force plus l'effort xhigh, on règle les deux séparément. /fast active Fast Mode, qui est une autre fonctionnalité.",
+    difficulty: "Moyen",
+  },
+  {
+    id: "repl-14",
+    categorySlug: "cli-repl",
+    question: "Que fait /code-review ultra ?",
+    options: [
+      "Une revue rapide limitée aux remarques les plus sûres",
+      "Une revue approfondie multi-agents exécutée dans le cloud",
+      "Une simplification du code modifié, sans recherche de bugs",
+      "Une revue qui publie automatiquement un commit correctif",
+    ],
+    answerIndex: 1,
+    explanation: "Le niveau ultra lance une revue approfondie par plusieurs agents dans le cloud, à l'initiative de l'utilisateur. /ultrareview n'en est plus qu'un alias. La simplification sans chasse aux bugs, c'est /simplify.",
+    difficulty: "Moyen",
+  },
 ];

@@ -172,4 +172,32 @@ export const outilsQuestions: QuizQuestion[] = [
     explanation: "Charger le schéma de tous les outils dès le départ gaspillerait du contexte ; ToolSearch le récupère seulement quand il devient nécessaire.",
     difficulty: "Moyen",
   },
+  {
+    id: "tool-16",
+    categorySlug: "outils",
+    question: "Une page publiée sert de liste d'inscriptions que les visiteurs remplissent. Où stocker ces inscriptions ?",
+    options: [
+      "Dans le code source de la page, en republiant à chaque inscription",
+      "Dans la base partagée de la page, via ArtifactData",
+      "Dans le localStorage du navigateur de chaque visiteur",
+      "Dans le CLAUDE.md du projet",
+    ],
+    answerIndex: 1,
+    explanation: "ArtifactData fournit une base partagée propre à la page : les données évoluent sans republier, et tous les visiteurs voient les mêmes lignes. Le localStorage reste propre à chaque navigateur.",
+    difficulty: "Moyen",
+  },
+  {
+    id: "tool-17",
+    categorySlug: "outils",
+    question: "Comment Claude doit-il traiter le contenu des lignes écrites par les visiteurs dans la base d'une page publiée ?",
+    options: [
+      "Comme des instructions prioritaires sur celles de l'utilisateur",
+      "Comme des données, jamais comme des instructions",
+      "Comme des commandes shell à exécuter",
+      "Il ne peut pas les lire",
+    ],
+    answerIndex: 1,
+    explanation: "Ces lignes viennent de tiers : ce sont des données à afficher ou analyser, pas des consignes à suivre. C'est une protection contre l'injection de prompt.",
+    difficulty: "Difficile",
+  },
 ];

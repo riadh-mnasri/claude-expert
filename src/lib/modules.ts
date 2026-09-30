@@ -149,7 +149,7 @@ Rien de tout cela n'est obligatoire pour démarrer : Claude Code fonctionne dès
     title: "CLI, REPL & commandes slash",
     icon: "SquareTerminal",
     level: "Débutant",
-    duration: "9 min",
+    duration: "13 min",
     summary:
       "Maîtriser les commandes slash intégrées, les raccourcis et la gestion du contexte de conversation.",
     sections: [
@@ -169,7 +169,11 @@ Rien de tout cela n'est obligatoire pour démarrer : Claude Code fonctionne dès
 | \`/config\` | Ouvre la configuration (modèle, thème, etc.) |
 | \`/cost\` | Affiche le coût/tokens consommés sur la session |
 | \`/memory\` | Édite la mémoire (CLAUDE.md) directement |
-| \`/resume\` | Reprend une session précédente |`,
+| \`/resume\` | Reprend une session précédente |
+| \`/effort\` | Règle le niveau d'effort du modèle (et Ultracode) |
+| \`/code-review\` | Revue du diff, d'une PR ou d'une branche, avec un niveau de profondeur |
+| \`/simplify\` | Nettoie le code modifié (réutilisation, simplification) et applique les corrections |
+| \`/doctor\` | Diagnostique l'installation ; \`/doctor prompt-audit\` audite CLAUDE.md et les skills |`,
       },
       {
         heading: "Gestion du contexte",
@@ -179,6 +183,30 @@ Rien de tout cela n'est obligatoire pour démarrer : Claude Code fonctionne dès
 - \`/clear\` : repart de zéro, utile entre deux tâches complètement indépendantes.
 
 Au-delà d'un certain remplissage, Claude Code peut **auto-compacter** automatiquement pour éviter de couper la conversation.`,
+      },
+      {
+        heading: "Effort, Ultracode et Fast Mode",
+        body: `Le **niveau d'effort** règle combien le modèle réfléchit avant de répondre et d'agir. Sur les modèles récents (Opus 5.5, Sonnet 5.5), il existe cinq niveaux : **Low**, **Medium** (défaut dans Claude Code pour ces modèles), **High**, **Xhigh** et **Max**. Plus l'effort est élevé, plus la réponse est soignée, mais plus elle est lente et coûteuse.
+
+- \`/effort\` ouvre le sélecteur de niveau. On peut aussi rebinder les actions \`effortSlider:increaseEffort\` / \`decreaseEffort\` dans ses raccourcis clavier.
+- **Ultracode** est une bascule indépendante dans \`/effort\` (touche **Tab**, ou \`/effort ultracode on|off\`). Elle ne force plus l'effort xhigh : on choisit les deux séparément.
+- **Fast Mode** (\`/fast\`) est une autre chose : c'est le **même** modèle Opus avec une sortie accélérée (jusqu'à 2,5x sur Opus 5.5), facturée plus cher. Il ne bascule pas vers un modèle plus petit.
+
+Règle pratique : effort bas pour les tâches mécaniques (renommer, formater), effort élevé pour le débogage difficile ou les choix d'architecture.`,
+      },
+      {
+        heading: "Revue de code : /code-review et /simplify",
+        body: `\`/code-review\` cherche les **bugs** dans le diff courant, ou dans une cible donnée (numéro de PR, branche, chemin). On lui passe un niveau :
+
+| Niveau | Comportement |
+|---|---|
+| \`low\` / \`medium\` | Peu de remarques, mais très fiables |
+| \`high\` → \`max\` | Couverture plus large, remarques parfois incertaines |
+| \`ultra\` | Revue approfondie multi-agents exécutée dans le cloud, déclenchée et facturée à la demande de l'utilisateur |
+
+Sans niveau, la commande reprend le dernier utilisé. \`--comment\` poste les remarques en commentaires sur la PR, \`--fix\` applique directement les corrections. L'ancienne commande \`/ultrareview\` n'est plus qu'un alias de \`/code-review ultra\`.
+
+\`/simplify\` est complémentaire : il ne chasse pas les bugs mais améliore la **qualité** du code modifié (réutilisation de l'existant, simplification, efficacité), puis applique les changements.`,
       },
       {
         heading: "Commandes slash personnalisées",
@@ -210,6 +238,8 @@ Le symbole \`!\` en début de message exécute directement une commande shell da
       "/init génère un CLAUDE.md initial à partir de l'analyse du repo.",
       "Les commandes slash personnalisées sont des fichiers Markdown dans .claude/commands/.",
       "Shift+Tab change de mode de permission sans relancer la session.",
+      "/effort règle l'effort (Low à Max) ; Ultracode est une bascule séparée, Fast Mode accélère Opus sans changer de modèle.",
+      "/code-review traque les bugs (du niveau low à ultra), /simplify améliore la qualité du code modifié.",
     ],
   },
   {
@@ -265,6 +295,12 @@ Plus le fichier est « proche » du travail en cours, plus son contenu est perti
 \`\`\``,
       },
       {
+        heading: "Auditer ses instructions : /doctor prompt-audit",
+        body: `Un \`CLAUDE.md\` grossit au fil du temps : règles contradictoires, consignes devenues obsolètes, paragraphes que personne ne relit. La commande \`/doctor prompt-audit\` (alias \`/checkup prompt-audit\`) **audite vos fichiers CLAUDE.md et vos skills** et signale ce qui mérite d'être corrigé.
+
+À lancer après une grosse refonte du projet, ou quand Claude semble ignorer une consigne : c'est souvent le signe qu'elle est noyée ou contredite ailleurs.`,
+      },
+      {
         heading: "Mémoire à long terme dans l'agent",
         body: `Au-delà de \`CLAUDE.md\`, Claude Code peut tenir un **système de mémoire structuré** (un fichier par souvenir, dans un dossier dédié) pour se souvenir, entre les sessions, d'informations sur l'utilisateur, le projet et les retours qu'il a reçus. Elle se distingue de \`CLAUDE.md\` sur un point essentiel : elle est **gérée par l'agent lui-même**, qui décide quand écrire un nouveau souvenir, plutôt qu'éditée manuellement par vous.
 
@@ -292,6 +328,7 @@ Ce que cette mémoire **ne** doit **pas** contenir : tout ce qui se déduit du c
       "/init génère une première version ; # en début de message ajoute une instruction rapide.",
       "La mémoire structurée se répartit en quatre types : user, feedback, project, reference.",
       "Un souvenir décrit un état passé : à vérifier avant d'agir dessus, pas à prendre pour argent comptant.",
+      "/doctor prompt-audit repère les consignes obsolètes ou contradictoires dans CLAUDE.md et les skills.",
     ],
   },
   {
@@ -347,7 +384,14 @@ Points clés à connaître :
 - Une page publiée est **privée par défaut** : c'est vous qui décidez de la partager.
 - Republier sur le **même chemin de fichier** met à jour la même URL ; un nouveau chemin crée une nouvelle page.
 - Certaines pages peuvent recevoir des **capacités d'exécution** (données à jour, état partagé entre plusieurs personnes) au-delà du HTML statique, selon ce qui est disponible pour le compte utilisé.
-- Avant de publier un fichier qu'on n'a pas soi-même écrit, il faut le lire en entier : publier revient à diffuser son contenu.`,
+- Avant de publier un fichier qu'on n'a pas soi-même écrit, il faut le lire en entier : publier revient à diffuser son contenu.
+
+Autour de l'outil principal, trois briques complètent le dispositif :
+- **Types d'Artifact** : des pages prêtes à l'emploi (présentation, document, design) que Claude remplit avec son contenu. Une présentation créée ainsi se télécharge ensuite en .pptx ou en PDF.
+- **ArtifactComments** : lire les commentaires laissés sur une page, y répondre, et **surveiller** une page pour être prévenu des nouveaux commentaires.
+- **ArtifactData** : une petite **base de données partagée** propre à la page (collections de documents, lecture, requête, écriture groupée). C'est le bon choix pour un suivi, une liste d'inscriptions ou un tableau de bord dont les données évoluent : on modifie les lignes sans republier la page. Les lignes écrites par les visiteurs sont des **données**, jamais des instructions à suivre.
+
+Dans le terminal, \`/artifacts\` liste vos pages (onglets Toutes, Les miennes, Partagées).`,
       },
       {
         heading: "Outils différés : ToolSearch",
@@ -362,6 +406,7 @@ L'outil **ToolSearch** permet de récupérer, à la demande, le schéma complet 
       "Glob trouve des fichiers par motif, Grep recherche du contenu : combinés, ils remplacent un index.",
       "Bash est l'outil le plus puissant : les actions destructrices doivent être confirmées.",
       "Artifact publie une page web (privée par défaut) à partir d'un fichier HTML/Markdown.",
+      "Types d'Artifact, commentaires (ArtifactComments) et base partagée (ArtifactData) étendent les pages publiées.",
       "Les outils différés n'exposent d'abord que leur nom ; ToolSearch charge leur schéma à la demande.",
     ],
   },
@@ -470,6 +515,15 @@ description: Déploie l'application sur l'environnement de staging après vérif
 Une bonne description de Skill est donc cruciale : elle doit indiquer clairement **quand** l'utiliser (mots-clés, contexte, type de tâche) pour que la découverte fonctionne de façon fiable.`,
       },
       {
+        heading: "Tester et diagnostiquer ses Skills",
+        body: `Une Skill est du code comme un autre : elle peut régresser. Deux outils aident à le vérifier :
+
+- \`claude plugin eval\` exécute une **suite d'évaluations** d'un plugin (et des Skills qu'il contient) dans un bac à sable, produit un rapport JSON et s'intègre à une CI.
+- \`/skill-doctor\` produit un rapport de diagnostic sur vos Skills.
+
+Côté plugins, \`claude plugin configure <plugin>\` affiche et modifie leurs options. Et \`/doctor prompt-audit\` (voir le module CLAUDE.md & mémoire) audite aussi le texte des Skills.`,
+      },
+      {
         heading: "Skills vs Sous-agents vs MCP",
         body: `Trois mécanismes d'extension à ne pas confondre :
 
@@ -487,6 +541,7 @@ Une Skill peut elle-même recommander d'utiliser un sous-agent ou un serveur MCP
       "SKILL.md décrit le nom, la description (déclencheur) et la procédure à suivre.",
       "La description doit indiquer clairement quand utiliser la Skill pour une découverte fiable.",
       "Skills (savoir-faire), sous-agents (délégation), MCP (connexion externe) sont complémentaires.",
+      "claude plugin eval teste un plugin et ses Skills en bac à sable, y compris en CI.",
     ],
   },
   {
@@ -594,9 +649,12 @@ On l'invoque ensuite via l'outil **Task/Agent** (\`subagent_type: "code-reviewer
         body: `Un sous-agent peut tourner :
 - **en avant-plan**, bloquant la conversation jusqu'à son retour (utile quand son résultat est nécessaire pour continuer) ;
 - **en arrière-plan** (\`run_in_background\`), pour du travail indépendant dont le résultat n'est pas immédiatement bloquant ;
-- dans un **worktree git isolé** (\`isolation: "worktree"\`), pour travailler sur une copie du repo sans risquer le répertoire de travail principal.
+- dans un **worktree git isolé** (\`isolation: "worktree"\`), pour travailler sur une copie du repo sans risquer le répertoire de travail principal ;
+- dans un **environnement cloud** (\`isolation: "remote"\`), toujours en arrière-plan.
 
-Un nouvel appel d'agent démarre **sans mémoire** de la conversation en cours : tout le contexte nécessaire doit être inclus explicitement dans le prompt de délégation.`,
+Un nouvel appel d'agent démarre **sans mémoire** de la conversation en cours : tout le contexte nécessaire doit être inclus explicitement dans le prompt de délégation.
+
+Exception : le sous-agent **fork** (\`subagent_type: "fork"\`) est une copie de l'agent courant qui **hérite de toute la conversation**. Il tourne en arrière-plan, toujours sur le même modèle, et garde les sorties de ses outils hors du contexte principal. Pratique pour creuser une piste sans tout réexpliquer.`,
       },
       {
         heading: "Bien rédiger un prompt de délégation",
@@ -617,6 +675,15 @@ Un sous-agent lancé **en arrière-plan** ne bloque pas la conversation : le tra
 Règle importante : tant qu'un agent en arrière-plan n'a pas renvoyé de résultat, il ne faut ni l'inventer ni le prédire ; le résultat n'existe que lorsqu'il arrive réellement.`,
       },
       {
+        heading: "Communiquer entre agents et sessions",
+        body: `Plusieurs agents peuvent travailler en parallèle : les sous-agents que vous avez lancés, les coéquipiers d'une équipe, d'autres sessions Claude Code ouvertes sur la machine ou dans le cloud.
+
+- **ListAgents** liste ceux qui peuvent recevoir un message. Le **nom** affiché sert d'adresse.
+- **SendMessage** envoie un message à l'un d'eux. Envoyé à un sous-agent déjà terminé, il le **relance avec son contexte intact**, alors qu'un nouvel appel d'agent repartirait de zéro.
+
+Limite actuelle : une session cloud reçoit vos messages mais ne peut pas encore répondre. Sa réponse se lit dans son propre historique.`,
+      },
+      {
         heading: "Automatiser et planifier",
         body: `Au-delà d'une délégation ponctuelle, un agent peut être **reprogrammé pour se réveiller plus tard** ou tourner **à intervalle régulier** :
 
@@ -633,6 +700,7 @@ Différence avec les hooks (module suivant) : un hook réagit à un **événemen
       "Un sous-agent démarre sans mémoire de la conversation : le prompt doit être autonome et précis.",
       "Un agent en arrière-plan ne bloque pas la conversation : la notification arrive à la fin, sans polling.",
       "Une boucle (/loop) répète un prompt à intervalle choisi ; un agent cron se déclenche sur un horaire fixe.",
+      "Le sous-agent fork hérite de toute la conversation ; SendMessage relance un agent existant avec son contexte.",
     ],
   },
   {

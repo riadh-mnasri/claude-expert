@@ -155,4 +155,18 @@ export const skillsQuestions: QuizQuestion[] = [
     explanation: "Chaque Skill est un module autonome qu'on peut ajouter, modifier ou retirer sans toucher au reste de la configuration.",
     difficulty: "Moyen",
   },
+  {
+    id: "skill-13",
+    categorySlug: "skills",
+    question: "Comment vérifier qu'une modification d'un plugin n'a pas dégradé le comportement de ses Skills ?",
+    options: [
+      "En relisant le SKILL.md à la main",
+      "Avec claude plugin eval, qui exécute une suite d'évaluations en bac à sable",
+      "Avec claude mcp list",
+      "En supprimant puis réinstallant le plugin",
+    ],
+    answerIndex: 1,
+    explanation: "claude plugin eval exécute les suites d'évaluation d'un plugin dans un bac à sable, produit un rapport JSON et peut tourner en CI.",
+    difficulty: "Moyen",
+  },
 ];
