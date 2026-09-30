@@ -46,6 +46,9 @@ export const fiches: Fiche[] = [
       { term: "/resume", desc: "Choisit une session précédente à reprendre" },
       { term: "/permissions", desc: "Affiche et modifie les règles de permission" },
       { term: "/fast", desc: "Active Fast Mode (Opus, output accéléré)" },
+      { term: "/effort", desc: "Règle le niveau d'effort, Ultracode inclus (Tab pour basculer)" },
+      { term: "/doctor prompt-audit", desc: "Audite les fichiers CLAUDE.md et les skills" },
+      { term: "/mcp reconnect all", desc: "Relance tous les serveurs MCP en échec" },
     ],
   },
   {
@@ -77,6 +80,7 @@ export const fiches: Fiche[] = [
       { term: "claude --resume", desc: "Choisit une session précédente" },
       { term: "claude mcp add nom", desc: "Ajoute un serveur MCP au projet" },
       { term: "claude mcp list", desc: "Liste les serveurs MCP configurés" },
+      { term: "claude --desktop", desc: "Ouvre l'app Claude desktop sur le dossier courant" },
     ],
   },
   {
@@ -288,13 +292,70 @@ description: Déploie l'app sur staging après
 
 export const nouveautes: Nouveaute[] = [
   {
+    id: "sonnet-5-5",
+    period: "28 septembre 2026",
+    title: "Claude Sonnet 5.5",
+    type: "Modèle",
+    impact: "majeur",
+    highlights: [
+      "Deuxième modèle de la famille Claude 5.5 : ID claude-sonnet-5-5, nouveau Sonnet par défaut dans Claude Code",
+      "Plus de 30 % plus rapide que Sonnet 5 et jusqu'à 30 % moins cher sur la plupart des tâches (2$ / 10$ par million de tokens)",
+      "70,6 % sur Terminal-Bench 4.0 (codage agentique), 80,1 % sur OSWorld 2.1 (computer use)",
+      "Effort par défaut réglé sur Medium dans Claude Code et les apps Claude",
+      "Claude Haiku 5.5 annoncé pour les semaines à venir",
+    ],
+  },
+  {
+    id: "opus-5-5",
+    period: "22 septembre 2026",
+    title: "Claude Opus 5.5",
+    type: "Modèle",
+    impact: "majeur",
+    highlights: [
+      "Premier modèle de la famille Claude 5.5 : ID claude-opus-5-5, nouvel Opus par défaut dans Claude Code (contexte 1M tokens)",
+      "Niveau de Fable 5.1 sur la plupart des tâches, 40 % moins cher qu'Opus 5 et plus de 30 % plus rapide en sortie",
+      "4$ / 20$ par million de tokens, Fast Mode jusqu'à 2,5x plus rapide (8$ / 40$)",
+      "5 niveaux d'effort (Low, Medium par défaut, High, Xhigh, Max), réflexion toujours active",
+      "Preserved thinking : protection anti-distillation, le contexte de réflexion précédent ne peut pas être modifié via l'API",
+    ],
+  },
+  {
+    id: "claude-code-septembre-2026",
+    period: "Septembre 2026",
+    title: "Claude Code : effort, diagnostic et administration",
+    type: "Claude Code",
+    impact: "important",
+    highlights: [
+      "Ultracode devient une bascule indépendante dans /effort (Tab, ou /effort ultracode on|off) et ne force plus l'effort xhigh",
+      "/doctor prompt-audit (alias /checkup prompt-audit) : audite vos fichiers CLAUDE.md et vos skills",
+      "/mcp reconnect all relance d'un coup tous les serveurs MCP en échec",
+      "claude --desktop ouvre l'app Claude desktop sur le dossier courant, claude plugin configure <plugin> règle les options d'un plugin",
+      "Nouveaux réglages managés : deniedModels, availableModelsMatch (\"exact\") et allowedProviders pour encadrer modèles et fournisseurs",
+      "Les sous-agents en arrière-plan héritent du mode de permission de la session parente",
+    ],
+  },
+  {
+    id: "api-septembre-2026",
+    period: "Septembre 2026",
+    title: "API Claude : compaction, cache et dépréciations",
+    type: "API",
+    impact: "important",
+    highlights: [
+      "Compaction à la demande dans la Messages API (bêta)",
+      "Messages système en cours de conversation pouvant définir des outils, y compris des toolsets MCP (bêta)",
+      "Diagnostic du cache de prompts sorti de bêta, lecture du cache baissée à 0,25$ par million de tokens",
+      "Claude Managed Agents : les politiques de permission acceptent le mode auto",
+      "Claude Sonnet 4.5 déprécié, retrait prévu le 30 novembre 2026",
+    ],
+  },
+  {
     id: "fable-5-1",
     period: "1er septembre 2026",
     title: "Claude Fable 5.1",
     type: "Modèle",
     impact: "majeur",
     highlights: [
-      "Dernier modèle généralement disponible d'Anthropic : ID claude-fable-5-1",
+      "Modèle de pointe d'Anthropic : ID claude-fable-5-1",
       "Effort par défaut variable selon le contexte : élevé dans Claude Code, moyen sur Claude Cowork et claude.ai",
       "Sorti aux côtés de Claude Mythos 5.1",
     ],
@@ -306,7 +367,7 @@ export const nouveautes: Nouveaute[] = [
     type: "Modèle",
     impact: "majeur",
     highlights: [
-      "Modèle phare pour le codage agentique complexe et les usages entreprise : ID claude-opus-5",
+      "Modèle phare pour le codage agentique complexe et les usages entreprise : ID claude-opus-5, remplacé depuis par Opus 5.5",
       "Fenêtre de contexte 1M tokens, jusqu'à 128K tokens de sortie",
       "Réflexion adaptative par défaut, 5 niveaux d'effort configurables",
     ],
@@ -318,7 +379,7 @@ export const nouveautes: Nouveaute[] = [
     type: "Modèle",
     impact: "majeur",
     highlights: [
-      "Modèle équilibré pour le codage agentique, l'utilisation d'outils et les workflows d'agents à moindre coût : ID claude-sonnet-5",
+      "Modèle équilibré pour le codage agentique, l'utilisation d'outils et les workflows d'agents à moindre coût : ID claude-sonnet-5, remplacé depuis par Sonnet 5.5",
       "2$ / million de tokens en entrée, 10$ / million en sortie",
     ],
   },
@@ -366,7 +427,7 @@ export const nouveautes: Nouveaute[] = [
     impact: "important",
     highlights: [
       "Opus avec output accéléré : pas de downgrade vers un modèle plus petit",
-      "Activé via /fast dans le REPL, disponible sur Opus 5 et Opus 4.8",
+      "Activé via /fast dans le REPL, disponible sur Opus 5.5 (jusqu'à 2,5x plus rapide), Opus 5 et Opus 4.8",
     ],
   },
   {
